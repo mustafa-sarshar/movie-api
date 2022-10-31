@@ -1,0 +1,40 @@
+.my {
+    &-table {
+        margin: auto;
+        border-collapse: collapse;
+        * {
+            padding: 10px;            
+        }
+        thead {
+            tr {
+                background-color: beige;
+                text-align: center;
+                border-bottom: 2px solid black;
+            }
+        }
+        tbody {
+            tr {
+                text-align: left;
+                background-color: lightgray;
+                border-bottom: 1px solid gray;
+                &:hover {
+                    background-color: gray;
+                    color: white;
+                }
+            }
+            td {                
+                &:first-child {
+                    border-right: 2px solid black;
+                }
+            }
+        }
+        tfoot {
+            td {
+                background-color: beige;
+                text-align: center;
+                border-top: 2px solid black;
+                font-style: italic;
+            }
+        }
+    }
+}
