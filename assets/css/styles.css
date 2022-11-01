@@ -1,3 +1,7 @@
+body {
+  background-color: #b1b1b1;
+}
+
 .my-table {
   margin: auto;
   border-collapse: collapse;
@@ -6,25 +10,29 @@
   padding: 10px;
 }
 .my-table thead tr {
-  background-color: beige;
+  background-color: #e4e4de;
   text-align: center;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #000000;
 }
 .my-table tbody tr {
   text-align: left;
-  background-color: lightgray;
+  background-color: #d3d3d3;
   border-bottom: 1px solid gray;
 }
 .my-table tbody tr:hover {
-  background-color: gray;
+  background-color: #808080;
   color: white;
 }
 .my-table tbody td:first-child {
-  border-right: 2px solid black;
+  border-right: 2px solid #000000;
 }
 .my-table tfoot td {
-  background-color: beige;
+  background-color: #e4e4de;
   text-align: center;
-  border-top: 2px solid black;
+  border-top: 2px solid #000000;
   font-style: italic;
+}
+
+.text-style__tab-spacing {
+  margin-left: 4ch;
 }/*# sourceMappingURL=styles.css.map */

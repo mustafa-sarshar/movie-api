@@ -14,8 +14,9 @@
     </header>
     <h2>Movie-API</h2>
     <P>
-        This web-app provides the users with information and details about different movies. Users can personalize their
-        movie list after signing up themselves and creating a list of their favorite movies
+        This web-app provides the users with information and details about different movies. Moreover, users can
+        personalize their movie list and create a list of their favorite movies, if they have already signed up
+        themselves and established a user account.
     </P>
     <h3>Features</h3>
     <p>
@@ -24,13 +25,13 @@
         <li>Return a list of ALL movies to the user</li>
         <li>Return data (description, genre, director, image URL, whether it is featured or not) about a single movie by
             title to the user</li>
-        <li>Return data about a genre (description) by name/title</li>
+        <li>Return data about a genre (description) by name</li>
         <li>Return data about a director (bio, birth year, death year) by name</li>
         <li>Allow new users to register</li>
         <li>Allow users to update their user info</li>
-        <li>Allow users to add a movie to their list of favorites</li>
-        <li>Allow users to remove a movie from their list of favorites</li>
         <li>Allow existing users to deregister.</li>
+        <li>Allow users to add a movie to their list of favorites</li>
+        <li>Allow users to remove a movie from their list of favorites</li>        
     </ul>
 
     </p>
@@ -48,20 +49,117 @@
         </thead>
         <tbody>
             <tr>
-                <td>Get a list of ALL top movies</td>
+                <td>Get a list of all movies</td>
                 <td>/movies</td>
                 <td>GET</td>
                 <td>None</td>
-                <td>A JSON object holding data about all top movies</td>
+                <td>A JSON object holding data about all movies</td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>Get information about a specific movie <br><em>(by "movie's title")</em></td>
+                <td>/movies/:title</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>A JSON object holding data about the movie</td>
             </tr>
-
+            <tr>
+                <td>Get information about a genre <br><em>(by "genre's name")</em></td>
+                <td>/movies/genre/:name</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>
+                    A JSON object holding all data about the genre
+                    <p>
+                        { <br>
+                        <span class="text-style__tab-spacing"></span>"name": "Movie 1 Genre",<br>
+                        <span class="text-style__tab-spacing"></span>"description": "Movie 1 Genre Description"<br>
+                        } <br>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>Get information about a director <br><em>(by "director's name")</em></td>
+                <td>/movies/directors/:name</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>
+                    A JSON object holding all data about the director
+                    <p>
+                        { <br>
+                        <span class="text-style__tab-spacing"></span>"name": "Director 1",,<br>
+                        <span class="text-style__tab-spacing"></span>"bio": "Bio Director 1",<br>
+                        <span class="text-style__tab-spacing"></span>"birthYear": 1890,<br>
+                        <span class="text-style__tab-spacing"></span>"deathYear": 2002<br>
+                        } <br>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>Register a new user</td>
+                <td>/users</td>
+                <td>POST</td>
+                <td>
+                    A JSON object holding data about user's name
+                    <p>
+                        { <br>
+                            <span class="text-style__tab-spacing"></span>"name": "user name" <br>
+                        } <br>
+                    </p>
+                </td>
+                <td>
+                    A JSON object holding data about the new user
+                    <p>
+                        { <br>
+                            <span class="text-style__tab-spacing"></span>"name": "user name", <br>
+                            <span class="text-style__tab-spacing"></span>"id": "6b0378d6-21d6-478f-a299-f5c98ee2fb40" <br>
+                        } <br>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>Update user info <br><em>(by "user's id")</em></td>
+                <td>/users/:id</td>
+                <td>PUT</td>
+                <td>
+                    A JSON object holding new data about the user
+                    <p>
+                        { <br>
+                            <span class="text-style__tab-spacing"></span>"name": "user's new name"<br>
+                        } <br>
+                    </p>
+                </td>
+                <td>
+                    A JSON object holding data about the updated user
+                    <p>
+                        { <br>
+                            <span class="text-style__tab-spacing"></span>"name": "user name", <br>
+                            <span class="text-style__tab-spacing"></span>"id": "6b0378d6-21d6-478f-a299-f5c98ee2fb40", <br>
+                            <span class="text-style__tab-spacing">"favoriteMovies": []</span> <br>
+                        } <br>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>Deregister a user <br><em>(by "user's id")</em></td>
+                <td>/users/:id</td>
+                <td>DELETE</td>
+                <td>None</td>
+                <td>A message including the info about the deregistered user</td>
+            </tr>
+            <tr>
+                <td>Add a movie to user's list of favorites <br><em>(by "movie title")</em></td>
+                <td>/users/:userId/:movieTitle</td>
+                <td>POST</td>
+                <td>None</td>
+                <td>A message including the info about the added movie to the list of favorites</td>
+            </tr>
+            <tr>
+                <td>Remove a movie from user's list of favorites <br><em>(by "movie title")</em></td>
+                <td>/users/:userId/:movieTitle</td>
+                <td>DELETE</td>
+                <td>None</td>
+                <td>A message including the info about the removed movie from the list of favorites</td>
+            </tr>            
         </tbody>
         <tfoot>
             <tr>

@@ -1,3 +1,13 @@
+// Global values
+$color-table__bg--light-1: #e4e4de;
+$color-table__border--dark: #000000;
+$color-table__td__bg--light: #d3d3d3;
+$color-table__td__bg--dark: #808080;
+
+body {
+    background-color: #b1b1b1;
+}
+
 .my {
     &-table {
         margin: auto;
@@ -7,34 +17,40 @@
         }
         thead {
             tr {
-                background-color: beige;
+                background-color: $color-table__bg--light-1;
                 text-align: center;
-                border-bottom: 2px solid black;
+                border-bottom: 2px solid $color-table__border--dark;
             }
         }
         tbody {
             tr {
                 text-align: left;
-                background-color: lightgray;
+                background-color: $color-table__td__bg--light;
                 border-bottom: 1px solid gray;
                 &:hover {
-                    background-color: gray;
+                    background-color: $color-table__td__bg--dark;
                     color: white;
                 }
             }
             td {                
                 &:first-child {
-                    border-right: 2px solid black;
+                    border-right: 2px solid $color-table__border--dark;
                 }
             }
         }
         tfoot {
             td {
-                background-color: beige;
+                background-color: $color-table__bg--light-1;
                 text-align: center;
-                border-top: 2px solid black;
+                border-top: 2px solid $color-table__border--dark;
                 font-style: italic;
             }
         }
+    }
+}
+
+.text-style {
+    &__tab-spacing {
+        margin-left: 4ch;
     }
 }

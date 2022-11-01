@@ -42,24 +42,6 @@ app.use(methodOverride());
 
 app.use(express.static("public"));
 
-let lstUsers = [
-	{
-		id: "1",
-		name: "user 1",
-		favoriteMovies: [],
-	},
-	{
-		id: "2",
-		name: "user 2",
-		favoriteMovies: ["Movie 1"],
-	},
-	{
-		id: "3",
-		name: "user 3",
-		favoriteMovies: ["Movie 2", "Movie 5"],
-	},
-];
-
 let lstMovies = [
 	{
 		title: "Movie 1",
@@ -148,6 +130,23 @@ let lstMovies = [
 	},
 ];
 
+let lstUsers = [
+	{
+		id: "1",
+		name: "user 1",
+		favoriteMovies: [],
+	},
+	{
+		id: "2",
+		name: "user 2",
+		favoriteMovies: ["Movie 1"],
+	},
+	{
+		id: "3",
+		name: "user 3",
+		favoriteMovies: ["Movie 2", "Movie 5"],
+	},
+];
 
 // Public Routes
 app.get("/", (req, res) => {
@@ -158,9 +157,50 @@ app.get("/documentation", (req, res) => {
 	res.sendFile("/public/documentation.html", { root: __dirname });
 });
 
+// Routes for Movies
+app.get("/movies", (req, res) => {
+	res.status(200).json(lstMovies);
+});
+
+// Get a Movie by Title
+app.get("/movies/:title", (req, res) => {
+	const { title } = req.params;
+	const movie = lstMovies.find((movie) => movie.title === title);
+	if (movie)
+		res.status(200)
+			.json(movie);
+	else
+		res.status(404)
+			.send(`No Movie Found with the title: ${title}`);
+});
+
+// Get the genre of a movie by title
+app.get("/movies/genre/:name", (req, res) => {
+	const { name } = req.params;
+	const genre = lstMovies.find((movie) => movie.genre.name === name).genre;
+	if (genre)
+		res.status(200)
+			.json(genre);
+	else
+		res.status(404)
+			.send(`No Genre Found with the name: ${name}`);
+});
+
+// Get the info about a director by name
+app.get("/movies/directors/:name", (req, res) => {
+	const { name } = req.params;
+	const director = lstMovies.find((movie) => movie.director.name === name).director;
+	if (director)
+		res.status(200)
+			.json(director);
+	else
+		res.status(404)
+			.send(`No Director Found with the name: ${name}`);
+});
+
 // Routes for Users
 
-// Get all users
+// Get all users (just for the development phase)
 app.get("/users", (req, res) => {
 	res.json(lstUsers);
 });
@@ -233,49 +273,6 @@ app.delete("/users/:userId/:movieTitle", (req, res) => {
 		res.status(404)		// NOT FOUND
 			.send(`No User Found with the name: ${updateUser.name}`);
 
-});
-
-
-
-// Routes for Movies
-app.get("/movies", (req, res) => {
-	res.status(200).json(lstMovies);
-});
-
-// Get a Movie by Title
-app.get("/movies/:title", (req, res) => {
-	const { title } = req.params;
-	const movie = lstMovies.find((movie) => movie.title === title);
-	if (movie)
-		res.status(200)
-			.send(movie);
-	else
-		res.status(404)
-			.send(`No Movie Found with the title: ${title}`);
-});
-
-// Get the genre of a movie by title
-app.get("/movies/genre/:name", (req, res) => {
-	const { name } = req.params;
-	const genre = lstMovies.find((movie) => movie.genre.name === name).genre;
-	if (genre)
-		res.status(200)
-			.send(genre);
-	else
-		res.status(404)
-			.send(`No Genre Found with the name: ${name}`);
-});
-
-// Get the info about a director by name
-app.get("/movies/directors/:name", (req, res) => {
-	const { name } = req.params;
-	const director = lstMovies.find((movie) => movie.director.name === name).director;
-	if (director)
-		res.status(200)
-			.send(director);
-	else
-		res.status(404)
-			.send(`No Director Found with the name: ${name}`);
 });
 
 // Error-handling middleware
