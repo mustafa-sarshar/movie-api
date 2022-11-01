@@ -28,8 +28,7 @@ body {
                 background-color: $color-table__td__bg--light;
                 border-bottom: 1px solid gray;
                 &:hover {
-                    background-color: $color-table__td__bg--dark;
-                    color: white;
+                    filter: invert(1);
                 }
             }
             td {                
@@ -50,6 +49,9 @@ body {
 }
 
 .text-style {
+    &__code-paragraph {
+        color: darkblue;
+    }
     &__tab-spacing {
         margin-left: 4ch;
     }

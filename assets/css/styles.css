@@ -20,8 +20,7 @@ body {
   border-bottom: 1px solid gray;
 }
 .my-table tbody tr:hover {
-  background-color: #808080;
-  color: white;
+  filter: invert(1);
 }
 .my-table tbody td:first-child {
   border-right: 2px solid #000000;
@@ -33,6 +32,9 @@ body {
   font-style: italic;
 }
 
+.text-style__code-paragraph {
+  color: darkblue;
+}
 .text-style__tab-spacing {
   margin-left: 4ch;
 }/*# sourceMappingURL=styles.css.map */
