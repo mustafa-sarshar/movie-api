@@ -31,7 +31,7 @@
         <li>Allow users to update their user info</li>
         <li>Allow existing users to deregister.</li>
         <li>Allow users to add a movie to their list of favorites</li>
-        <li>Allow users to remove a movie from their list of favorites</li>        
+        <li>Allow users to remove a movie from their list of favorites</li>
     </ul>
 
     </p>
@@ -60,7 +60,42 @@
                 <td>/movies/:title</td>
                 <td>GET</td>
                 <td>None</td>
-                <td>A JSON object holding data about the movie</td>
+                <td>
+                    A JSON object holding data about the movie
+                    <p>
+                        { <br>
+                        <span class="text-style__tab-spacing">"title": "Movie 1",</span><br>
+                        <span class="text-style__tab-spacing">"description": "Movie 1 Description",</span><br>
+                        <span class="text-style__tab-spacing">"author": "Author 1",</span><br>
+                        <span class="text-style__tab-spacing">"genre": {</span><br>
+                        <span class="text-style__tab-spacing">
+                            <span class="text-style__tab-spacing">"name": "Movie 1 Genre",</span>
+                        </span><br>
+                        <span class="text-style__tab-spacing">
+                            <span class="text-style__tab-spacing">"description": "Movie 1 Genre Description"</span>
+                        </span><br>                        
+                        <span class="text-style__tab-spacing">},</span><br>
+
+                        <span class="text-style__tab-spacing">"director": {</span><br>
+                        <span class="text-style__tab-spacing">
+                            <span class="text-style__tab-spacing">"name": "Director 1",</span>
+                        </span><br>
+                        <span class="text-style__tab-spacing">
+                            <span class="text-style__tab-spacing">"bio": "Bio Director 1",</span>
+                        </span><br>
+                        <span class="text-style__tab-spacing">
+                            <span class="text-style__tab-spacing">"birthYear": 1890,</span>
+                        </span><br>
+                        <span class="text-style__tab-spacing">
+                            <span class="text-style__tab-spacing">"deathYear": 2002</span>
+                        </span><br>
+                        <span class="text-style__tab-spacing">},</span><br>
+
+                        <span class="text-style__tab-spacing">"imageURL": "image_1.png",</span><br>
+                        <span class="text-style__tab-spacing">"featured": false</span><br>
+                        } <br>
+                    </p>
+                </td>
             </tr>
             <tr>
                 <td>Get information about a genre <br><em>(by "genre's name")</em></td>
@@ -71,8 +106,8 @@
                     A JSON object holding all data about the genre
                     <p>
                         { <br>
-                        <span class="text-style__tab-spacing"></span>"name": "Movie 1 Genre",<br>
-                        <span class="text-style__tab-spacing"></span>"description": "Movie 1 Genre Description"<br>
+                        <span class="text-style__tab-spacing">"name": "Movie 1 Genre",</span><br>
+                        <span class="text-style__tab-spacing">"description": "Movie 1 Genre Description"</span><br>
                         } <br>
                     </p>
                 </td>
@@ -86,10 +121,10 @@
                     A JSON object holding all data about the director
                     <p>
                         { <br>
-                        <span class="text-style__tab-spacing"></span>"name": "Director 1",,<br>
-                        <span class="text-style__tab-spacing"></span>"bio": "Bio Director 1",<br>
-                        <span class="text-style__tab-spacing"></span>"birthYear": 1890,<br>
-                        <span class="text-style__tab-spacing"></span>"deathYear": 2002<br>
+                        <span class="text-style__tab-spacing">"name": "Director 1",</span><br>
+                        <span class="text-style__tab-spacing">"bio": "Bio Director 1",</span><br>
+                        <span class="text-style__tab-spacing">"birthYear": 1890,</span><br>
+                        <span class="text-style__tab-spacing">"deathYear": 2002</span><br>
                         } <br>
                     </p>
                 </td>
@@ -102,7 +137,7 @@
                     A JSON object holding data about user's name
                     <p>
                         { <br>
-                            <span class="text-style__tab-spacing"></span>"name": "user name" <br>
+                            <span class="text-style__tab-spacing">"name": "user name"</span><br>
                         } <br>
                     </p>
                 </td>
@@ -110,8 +145,8 @@
                     A JSON object holding data about the new user
                     <p>
                         { <br>
-                            <span class="text-style__tab-spacing"></span>"name": "user name", <br>
-                            <span class="text-style__tab-spacing"></span>"id": "6b0378d6-21d6-478f-a299-f5c98ee2fb40" <br>
+                            <span class="text-style__tab-spacing">"name": "user name",</span><br>
+                            <span class="text-style__tab-spacing">"id": "6b0378d6-21d6-478f-a299-f5c98ee2fb40"</span><br>
                         } <br>
                     </p>
                 </td>
@@ -124,7 +159,7 @@
                     A JSON object holding new data about the user
                     <p>
                         { <br>
-                            <span class="text-style__tab-spacing"></span>"name": "user's new name"<br>
+                            <span class="text-style__tab-spacing">"name": "user's new name"</span><br>
                         } <br>
                     </p>
                 </td>
@@ -132,9 +167,9 @@
                     A JSON object holding data about the updated user
                     <p>
                         { <br>
-                            <span class="text-style__tab-spacing"></span>"name": "user name", <br>
-                            <span class="text-style__tab-spacing"></span>"id": "6b0378d6-21d6-478f-a299-f5c98ee2fb40", <br>
-                            <span class="text-style__tab-spacing">"favoriteMovies": []</span> <br>
+                            <span class="text-style__tab-spacing">"name": "user name",</span><br>
+                            <span class="text-style__tab-spacing">"id": "6b0378d6-21d6-478f-a299-f5c98ee2fb40",</span><br>
+                            <span class="text-style__tab-spacing">"favoriteMovies": []</span><br>
                         } <br>
                     </p>
                 </td>
@@ -159,11 +194,15 @@
                 <td>DELETE</td>
                 <td>None</td>
                 <td>A message including the info about the removed movie from the list of favorites</td>
-            </tr>            
+            </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="5">Enjoy it</td>
+                <td colspan="5">
+                    Table shows various requests you might make to the app for organizing users data and
+                    their corresponding URL endpoints; the HTTP methods used to make the requests; and the
+                    body data format your API might expect for each request and response.
+                </td>
             </tr>
         </tfoot>
     </table>
