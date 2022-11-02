@@ -8,7 +8,7 @@ const
 	path = require("path"),
 	bodyParser = require("body-parser"),
 	methodOverride = require("method-override"),
-	uuid = require("uuid");
+	{ v4: uuidV4 } = require("uuid");
 
 const port = process.env.PORT || 8080;
 
@@ -44,6 +44,7 @@ app.use(express.static("public"));
 
 let lstMovies = [
 	{
+		id: uuidV4(),
 		title: "Movie 1",
 		author: "Author 1",
 		description: "Movie 1 Description",
@@ -61,6 +62,7 @@ let lstMovies = [
 		featured: false,
 	},
 	{
+		id: uuidV4(),
 		title: "Movie 2",
 		author: "Author 2",
 		description: "Movie 2 Description",
@@ -78,6 +80,7 @@ let lstMovies = [
 		featured: false,
 	},
 	{
+		id: uuidV4(),
 		title: "Movie 3",
 		author: "Author 3",
 		description: "Movie 3 Description",
@@ -95,6 +98,7 @@ let lstMovies = [
 		featured: false,
 	},
 	{
+		id: uuidV4(),
 		title: "Movie 4",
 		author: "Author 4",
 		description: "Movie 4 Description",
@@ -112,6 +116,7 @@ let lstMovies = [
 		featured: false,
 	},
 	{
+		id: uuidV4(),
 		title: "Movie 5",
 		author: "Author 5",
 		description: "Movie 5 Description",
@@ -132,17 +137,17 @@ let lstMovies = [
 
 let lstUsers = [
 	{
-		id: "1",
+		id: uuidV4(),
 		name: "user 1",
 		favoriteMovies: [],
 	},
 	{
-		id: "2",
+		id: uuidV4(),
 		name: "user 2",
 		favoriteMovies: ["Movie 1"],
 	},
 	{
-		id: "3",
+		id: uuidV4(),
 		name: "user 3",
 		favoriteMovies: ["Movie 2", "Movie 5"],
 	},
@@ -209,7 +214,7 @@ app.get("/users", (req, res) => {
 app.post("/users", (req, res) => {
 	const newUser = req.body;
 	if (newUser.name) {
-		newUser.id = uuid.v4();
+		newUser.id = uuidV4();
 		lstUsers.push(newUser);
 		res.status(201)		// CREATED
 			.json(newUser);
@@ -249,7 +254,7 @@ app.delete("/users/:id", (req, res) => {
 });
 
 // Add a movie to the favorite movies
-app.post("/users/:userId/:movieTitle", (req, res) => {
+app.patch("/users/:userId/favorites/:movieTitle", (req, res) => {
 	const { userId, movieTitle } = req.params;
 	const user = lstUsers.find((user) => user.id == userId);
 	if (user) {
@@ -262,7 +267,7 @@ app.post("/users/:userId/:movieTitle", (req, res) => {
 });
 
 // Delete from favorite movies
-app.delete("/users/:userId/:movieTitle", (req, res) => {
+app.delete("/users/:userId/favorites/:movieTitle", (req, res) => {
 	const { userId, movieTitle } = req.params;
 	const user = lstUsers.find((user) => user.id == userId);
 	if (user) {

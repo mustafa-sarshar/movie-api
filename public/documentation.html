@@ -183,14 +183,14 @@
             </tr>
             <tr>
                 <td>Add a movie to user's list of favorites <br><em>(by "movie title")</em></td>
-                <td>/users/:userId/:movieTitle</td>
-                <td>POST</td>
+                <td>/users/:userId/favorites/:movieTitle</td>
+                <td>PATCH</td>
                 <td>None</td>
                 <td>A message including the info about the added movie to the list of favorites</td>
             </tr>
             <tr>
                 <td>Remove a movie from user's list of favorites <br><em>(by "movie title")</em></td>
-                <td>/users/:userId/:movieTitle</td>
+                <td>/users/:userId/favorites/:movieTitle</td>
                 <td>DELETE</td>
                 <td>None</td>
                 <td>A message including the info about the removed movie from the list of favorites</td>
