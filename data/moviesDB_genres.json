@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "636541f9216291acecb8d8fb",
+    "name": "Thriller",
+    "des": "Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience. Tension is created by delaying what the audience sees as inevitable, and is built through situations that are menacing or where escape seems impossible."
+  },
+  {
+    "_id": "636541f9216291acecb8d8fc",
+    "name": "Animated",
+    "des": "Animation is a method in which pictures are manipulated to appear as moving images. In traditional animation, images are drawn or painted by hand on transparent celluloid sheets to be photographed and exhibited on film."
+  },
+  {
+    "_id": "636541f9216291acecb8d8fd",
+    "name": "Comedy",
+    "des": "Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect."
+  },
+  {
+    "_id": "636541f9216291acecb8d8fe",
+    "name": "Drama",
+    "des": "In film and television, drama is a category or genre of narrative fiction (or semi-fiction) intended to be more serious than humorous in tone."
+  },
+  {
+    "_id": "636541f9216291acecb8d8ff",
+    "name": "Romance",
+    "des": "Romance films or movies involve romantic love stories recorded in visual media for broadcast in theatres or on television that focus on passion, emotion, and the affectionate romantic involvement of the main characters."
+  },
+  {
+    "_id": "636541f9216291acecb8d900",
+    "name": "Action",
+    "des": "Action film is a film genre in which the protagonist is thrust into a series of events that typically involve violence and physical feats."
+  }
+]

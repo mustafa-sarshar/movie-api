@@ -1,0 +1,53 @@
+[
+  {
+    "_id": "63655892216291acecb8d90b",
+    "username": "user1",
+    "pass": "user1pass",
+    "email": "user1@mail.com",
+    "birth": "1999-05-15T00:00:00.000Z",
+    "favList": [
+      [
+        "63655725216291acecb8d904",
+        "63655725216291acecb8d909",
+        "63655725216291acecb8d906"
+      ]
+    ]
+  },
+  {
+    "_id": "63655892216291acecb8d90c",
+    "username": "user2",
+    "pass": "user2pass",
+    "email": "user2@mail.com",
+    "birth": "2000-06-10T00:00:00.000Z",
+    "favList": [
+      [
+        "63655725216291acecb8d904"
+      ]
+    ]
+  },
+  {
+    "_id": "63655892216291acecb8d90d",
+    "username": "user3",
+    "pass": "user3pass",
+    "email": "user3@mail.com",
+    "birth": "1980-01-01T00:00:00.000Z",
+    "favList": [
+      [
+        "63655725216291acecb8d908",
+        "63655725216291acecb8d90a"
+      ]
+    ]
+  },
+  {
+    "_id": "63655892216291acecb8d90e",
+    "username": "user4",
+    "pass": "user4pass",
+    "email": "user4@mail.com",
+    "birth": "2005-01-20T00:00:00.000Z",
+    "favList": [
+      [
+        "63655725216291acecb8d905"
+      ]
+    ]
+  }
+]
