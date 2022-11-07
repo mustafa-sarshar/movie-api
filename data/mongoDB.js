@@ -260,17 +260,84 @@ db.users.update(
     { "username": "user1" },
     {
         $push: {
-            "favList": [
-                db.movies.findOne({ "title": "Spider-Man" })._id,
-                db.movies.findOne({ "title": "Avatar" })._id,
-                db.movies.findOne({ "title": "Batman & Robin" })._id
-            ]
+            "favList": ObjectId(db.movies.findOne({ "title": "Spider-Man" })._id)
+        }
+    }
+);
+db.users.update(
+    { "username": "user1" },
+    {
+        $push: {
+             "favList": ObjectId(db.movies.findOne({ "title": "Batman & Robin" })._id)
+        }
+    }
+);
+db.users.update(
+    { "username": "user1" },
+    {
+        $push: {
+            "favList": ObjectId(db.movies.findOne({ "title": "Avatar" })._id)
         }
     }
 );
 
+db.users.update(
+    { "username": "user1" },
+    {
+        $push: {
+            "favList": ObjectId(db.movies.findOne({ "title": "Cousins" })._id)
+        }
+    }
+);
+
+db.users.update(
+    { "username": "user2" },
+    {
+        $push: {
+            "favList": ObjectId(db.movies.findOne({ "title": "The Godfather" })._id)
+        }
+    }
+);
+
+db.users.update(
+    { "username": "user3" },
+    {
+        $push: {
+            "favList": ObjectId(db.movies.findOne({ "title": "Silence of the Lambs" })._id)
+        }
+    }
+);
+
+db.users.update(
+    { "username": "user3" },
+    {
+        $push: {
+            "favList": ObjectId(db.movies.findOne({ "title": "Terminator 2: Judgment Day" })._id)
+        }
+    }
+);
+
+db.users.update(
+    { "username": "user4" },
+    {
+        $push: {
+            "favList": ObjectId(db.movies.findOne({ "title": "Titanic" })._id)
+        }
+    }
+);
+
+db.users.update(
+    { "username": "user4" },
+    {
+        $push: {
+            "favList": ObjectId(db.movies.findOne({ "title": "The Number 23" })._id)
+        }
+    }
+);
 // Delete the user: 'user1'
 db.users.deleteOne({ "username": "user5" });
 
 // Read all users
 db.users.find();
+
+
