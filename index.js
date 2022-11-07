@@ -8,26 +8,39 @@ const
 	path = require("path"),
 	bodyParser = require("body-parser"),
 	methodOverride = require("method-override"),
-	{ v4: uuidV4 } = require("uuid");
+	{ v4: uuidV4 } = require("uuid"),
+	mongoose = require('mongoose'),
+	bcrypt = require("bcryptjs");
 
 const port = process.env.PORT || 8080;
-
+const salt = bcrypt.genSaltSync(10);
 const app = express();
+const { Director: Directors, Actor: Actors, Genre: Genres, Movie: Movies, User: Users, User } = require('./models/models.js');
+
+// Directors.collection.drop();
+// Genres.collection.drop();
+// Movies.collection.drop();
+// Users.collection.drop();
+
+const dbPwd = process.env.DBPASS_MOVIE_API || 1234
+mongoose.connect(
+	`mongodb+srv://admin:${dbPwd}@careerfoundry.02zyj73.mongodb.net/?retryWrites=true&w=majority`,
+	{ useNewUrlParser: true, useUnifiedTopology: true }
+);
 
 // create a write stream (in append mode) a ‘log.txt’ file is created in root directory
 const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), { flags: "a" });
 // setup the logger
-app.use(morgan("combined", { stream: accessLogStream }));
 
 const requestDateTimeNow = (req, res, next) => {
 	const dateIns = new Date();
 	const dateNow =
-		dateIns.getDate() + "/" +
-		(dateIns.getMonth() + 1) + "/" +
-		dateIns.getFullYear() + " @ " +
-		dateIns.getHours() + ":" +
-		dateIns.getMinutes() + ":" +
-		dateIns.getSeconds();
+	dateIns.getDate() + "/" +
+	(dateIns.getMonth() + 1) + "/" +
+	dateIns.getFullYear() + " @ " +
+	dateIns.getHours() + ":" +
+	dateIns.getMinutes() + ":" +
+	dateIns.getSeconds();
 	req.requestDateTime = dateNow;
 	console.log(req.url, "...requested -", dateNow);
 	next();
@@ -38,6 +51,7 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 app.use(bodyParser.json());
+app.use(morgan("combined", { stream: accessLogStream }));
 app.use(methodOverride());
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -164,7 +178,16 @@ app.get("/documentation", (req, res) => {
 
 // Routes for Movies
 app.get("/movies", (req, res) => {
-	res.status(200).json(lstMovies);
+	Movies.find()
+		.then((users) => {
+			res.status(200)
+				.json(users);
+		})
+		.catch((err) => {
+			console.error(err);
+			res.status(500)
+				.send("Error: " + err);
+		});
 });
 
 // Get a Movie by Title
@@ -207,78 +230,158 @@ app.get("/movies/directors/:name", (req, res) => {
 
 // Get all users (just for the development phase)
 app.get("/users", (req, res) => {
-	res.json(lstUsers);
+	Users.find()
+		.then((users) => {
+			res.status(200)
+				.json(users);
+		})
+		.catch((err) => {
+			console.error(err);
+			res.status(500)
+				.send("Error: " + err);
+		});
 });
 
 // Create a new user
-app.post("/users", (req, res) => {
-	const newUser = req.body;
-	if (newUser.name) {
-		newUser.id = uuidV4();
-		lstUsers.push(newUser);
-		res.status(201)		// CREATED
-			.json(newUser);
-	} else {
-		res.status(400)		// BAD REQUEST
-			.send("Name attribute is missing!!!");
-	}
-});
+app.route("/users")
+	.post((req, res) => {
+		const { username, pass, email, birth } = req.body;
+		if (username && pass && email) {
+			Users.findOne({ username: username })
+				.then((user) => {
+					if (user) {
+						return res.status(400)
+							.send(username + "already exists");
+					} else {
+						const newUser = {};
+						newUser.username = username;
+						newUser.pass = bcrypt.hashSync(pass, salt);
+						newUser.email = email;
+						if (birth) newUser.birth = birth;
+						Users
+							.create(newUser)
+							.then((user) => {
+								res.status(201)	// CREATED
+									.json(user)
+							})
+							.catch((error) => {
+								console.error(error);
+								res.status(500)
+									.send("Error: " + error);
+							});
+					}
+				})
+				.catch((error) => {
+					console.error(error);
+					res.status(500)
+						.send("Error: " + error);
+				});
+		} else {
+			res.status(400)		// BAD REQUEST
+				.send("Username, password and email are required!!!");
+		}
+	});
 
-// Update a user
-app.put("/users/:id", (req, res) => {
-	const { id } = req.params;
-	const updateUser = req.body;
-	const user = lstUsers.find((user) => user.id == id);
-	if (user) {
-		user.name = updateUser.name;
-		res.status(200)
-			.json(user);
-	} else
-		res.status(404)		// NOT FOUND
-			.send(`No User Found with the name: ${updateUser.name}`);
+app.route("/users/:username")
+	// Find a user		-------------------------------------------
+	.get((req, res) => {
+		const { username } = req.params;
+		Users.findOne({ username: username })
+			.then((user) => {
+				res.json(user);
+			})
+			.catch((err) => {
+				console.error(err);
+				res.status(500)
+					.send("Error: " + err);
+			});
+	})
+	// Update a user	-------------------------------------------
+	.put((req, res) => {
+		const { username } = req.params;
+		const { pass, email, birth } = req.body;
+		if (username) {
+			Users.findOneAndUpdate(
+				{ username: username },
+				{
+					$set:
+					{
+						username: username,
+						pass: pass,
+						email: email,
+						birth: birth
+					}
+				},
+				{ new: true }, // This line makes sure that the updated document is returned
+				(err, updatedUser) => {
+					if (err) {
+						res.status(500)
+							.send("Error: " + err);
+					} else {
+						res.json(updatedUser);
+					}
+				});
+		} else {
+			res.status(400)		// BAD REQUEST
+				.send("Username is required!!!");
+		}
+	})
+	// Delete a user	-------------------------------------------
+	.delete((req, res) => {
+		const { username } = req.params;
+		Users.findOneAndRemove(
+			{ username: username },
+			(err, deletedUser) => {
+				if (err) {
+					res.status(500)
+						.send("Error: " + err);
+				} else {
+					res.json(deletedUser);
+				}
+			});
+	});
 
-});
-
-// Delete a user
-app.delete("/users/:id", (req, res) => {
-	const { id } = req.params;
-	const user = lstUsers.find((user) => user.id == id);
-	if (user) {
-		lstUsers = lstUsers.filter((user) => user.id != id);
-		res.status(200)
-			.json(`The user with user id: ${id}, is removed.`);
-	} else
-		res.status(404)		// NOT FOUND
-			.send(`No User Found with the name: ${updateUser.name}`);
-
-});
-
-// Add a movie to the favorite movies
-app.patch("/users/:userId/favorites/:movieTitle", (req, res) => {
-	const { userId, movieTitle } = req.params;
-	const user = lstUsers.find((user) => user.id == userId);
-	if (user) {
-		user.favoriteMovies.push(movieTitle);
-		res.status(200)
-			.send(`${movieTitle} has been added to ${user.name}'s favorite movies.`);
-	} else
-		res.status(404)		// NOT FOUND
-			.send(`No User Found with the name: ${updateUser.name}`);
-});
-
-// Delete from favorite movies
-app.delete("/users/:userId/favorites/:movieTitle", (req, res) => {
-	const { userId, movieTitle } = req.params;
-	const user = lstUsers.find((user) => user.id == userId);
-	if (user) {
-		user.favoriteMovies = user.favoriteMovies.filter((title) => title !== movieTitle);
-		res.status(200)
-			.send(`${movieTitle} has been removed from ${user.name}'s favorite movies.`);
-	} else
-		res.status(404)		// NOT FOUND
-			.send(`No User Found with the name: ${updateUser.name}`);
-
-});
+// Add a movie to the favorite movies -----------------------------
+app.route("/users/:username/favorites/:movieID")
+	.patch((req, res) => {
+		const { username, movieID } = req.params;
+		Users.findOneAndUpdate(
+			{ username: username },
+			{
+				$addToSet: {
+					favList: movieID
+				}
+			},
+			{ new: true }, // This line makes sure that the updated document is returned
+			(err, updatedUser) => {
+				if (err) {
+					res.status(500)
+						.send("Error: " + err);
+				} else {
+					res.json(updatedUser);
+				}
+			});
+	})
+	// Delete from favorite movies --------------------------------
+	.delete((req, res) => {
+		const { username, movieID } = req.params;
+		Users.findOneAndUpdate(
+			{ username: username },
+			{
+				$pull: {
+					favList: movieID
+				}
+			},
+			{ new: true }, // This line makes sure that the updated document is returned
+			(err, updatedUser) => {
+				if (err) {
+					res.status(500)
+						.send("Error: " + err);
+				} else {
+					res.json(updatedUser);
+				}
+			});
+	});
 
 // Error-handling middleware
 app.use((err, req, res, next) => {
