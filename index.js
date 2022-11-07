@@ -1,5 +1,6 @@
 "use strict";
 
+require("dotenv").config();
 // Requirements
 const
 	express = require("express"),
@@ -12,7 +13,7 @@ const
 	mongoose = require('mongoose'),
 	bcrypt = require("bcryptjs");
 
-const port = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 const salt = bcrypt.genSaltSync(10);
 const app = express();
 const { Director: Directors, Actor: Actors, Genre: Genres, Movie: Movies, User: Users, User } = require('./models/models.js');
@@ -22,9 +23,8 @@ const { Director: Directors, Actor: Actors, Genre: Genres, Movie: Movies, User: 
 // Movies.collection.drop();
 // Users.collection.drop();
 
-const dbPwd = process.env.DBPASS_MOVIE_API || 1234
 mongoose.connect(
-	`mongodb+srv://admin:${dbPwd}@careerfoundry.02zyj73.mongodb.net/?retryWrites=true&w=majority`,
+	process.env.DATABASE_URI,
 	{ useNewUrlParser: true, useUnifiedTopology: true }
 );
 
@@ -390,7 +390,8 @@ app.use((err, req, res, next) => {
 		.send("Something broke!");
 });
 
-// listen for requests
-app.listen(port, () => {
-	console.log(`Your app is listening on port ${port}.`);
+mongoose.connection.once("open", () => {
+    console.log("Connected to Database");
+    // Start the server and listen to events on port ...
+    app.listen(PORT, () => { console.log(`Server is running on port ${PORT}`); });
 });
