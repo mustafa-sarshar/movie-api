@@ -607,3 +607,8 @@ Timestamp: Tue Oct 25 2022 17:05:47 GMT+0200 (Central European Summer Time)
 ::ffff:127.0.0.1 - - [08/Nov/2022:11:23:05 +0000] "PATCH /users/user5/63655725216291acecb8d902 HTTP/1.1" 404 177 "-" "Thunder Client (https://www.thunderclient.com)"
 ::ffff:127.0.0.1 - - [08/Nov/2022:11:23:39 +0000] "PATCH /users/user5/favorites/63655725216291acecb8d902 HTTP/1.1" 200 95 "-" "Thunder Client (https://www.thunderclient.com)"
 ::ffff:127.0.0.1 - - [08/Nov/2022:11:24:17 +0000] "DELETE /users/user5/favorites/63655725216291acecb8d902 HTTP/1.1" 200 99 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [08/Nov/2022:19:56:49 +0000] "GET /login HTTP/1.1" 404 144 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [08/Nov/2022:19:58:13 +0000] "GET /login HTTP/1.1" 404 144 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [08/Nov/2022:20:00:18 +0000] "GET /login HTTP/1.1" 404 144 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [08/Nov/2022:20:04:16 +0000] "GET /login HTTP/1.1" 404 144 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [08/Nov/2022:20:05:05 +0000] "GET /login HTTP/1.1" 404 144 "-" "Thunder Client (https://www.thunderclient.com)"

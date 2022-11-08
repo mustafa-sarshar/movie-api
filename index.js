@@ -7,11 +7,12 @@ const
 	morgan = require("morgan"),
 	fs = require("fs"),
 	path = require("path"),
+	{ requestDateTimeNow } = require("./utils/middleware"),
 	bodyParser = require("body-parser"),
 	methodOverride = require("method-override"),
-	{ v4: uuidV4 } = require("uuid"),
 	mongoose = require('mongoose'),
-	bcrypt = require("bcryptjs");
+	bcrypt = require("bcryptjs"),
+	passport = require("passport");
 
 const PORT = process.env.PORT || 3000;
 const salt = bcrypt.genSaltSync(10);
@@ -30,26 +31,15 @@ mongoose.connect(
 
 // create a write stream (in append mode) a ‘log.txt’ file is created in root directory
 const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), { flags: "a" });
-// setup the logger
-
-const requestDateTimeNow = (req, res, next) => {
-	const dateIns = new Date();
-	const dateNow =
-	dateIns.getDate() + "/" +
-	(dateIns.getMonth() + 1) + "/" +
-	dateIns.getFullYear() + " @ " +
-	dateIns.getHours() + ":" +
-	dateIns.getMinutes() + ":" +
-	dateIns.getSeconds();
-	req.requestDateTime = dateNow;
-	console.log(req.url, "...requested -", dateNow);
-	next();
-};
 
 app.use(requestDateTimeNow);
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
+
+const auth = require("./controller/auth")(app);
+require("./controller/passport");
+
 app.use(bodyParser.json());
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(methodOverride());
