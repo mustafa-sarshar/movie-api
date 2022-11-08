@@ -56,117 +56,6 @@ app.use(methodOverride());
 
 app.use(express.static(path.join(__dirname, "public")));
 
-let lstMovies = [
-	{
-		id: uuidV4(),
-		title: "Movie 1",
-		author: "Author 1",
-		description: "Movie 1 Description",
-		genre: {
-			name: "Movie 1 Genre",
-			description: "Movie 1 Genre Description",
-		},
-		director: {
-			name: "Director 1",
-			bio: "Bio Director 1",
-			birthYear: 1890,
-			deathYear: 2002,
-		},
-		imageURL: "image_1.png",
-		featured: false,
-	},
-	{
-		id: uuidV4(),
-		title: "Movie 2",
-		author: "Author 2",
-		description: "Movie 2 Description",
-		genre: {
-			name: "Movie 2 Genre",
-			description: "Movie 2 Genre Description",
-		},
-		director: {
-			name: "Director 2",
-			bio: "Bio Director 2",
-			birthYear: 1990,
-			deathYear: 2012,
-		},
-		imageURL: "image_2.png",
-		featured: false,
-	},
-	{
-		id: uuidV4(),
-		title: "Movie 3",
-		author: "Author 3",
-		description: "Movie 3 Description",
-		genre: {
-			name: "Movie 3 Genre",
-			description: "Movie 3 Genre Description",
-		},
-		director: {
-			name: "Director 3",
-			bio: "Bio Director 3",
-			birthYear: 2000,
-			deathYear: 2022,
-		},
-		imageURL: "image_3.png",
-		featured: false,
-	},
-	{
-		id: uuidV4(),
-		title: "Movie 4",
-		author: "Author 4",
-		description: "Movie 4 Description",
-		genre: {
-			name: "Movie 4 Genre",
-			description: "Movie 4 Genre Description",
-		},
-		director: {
-			name: "Director 4",
-			bio: "Bio Director 4",
-			birthYear: 1900,
-			deathYear: 2000,
-		},
-		imageURL: "image_4.png",
-		featured: false,
-	},
-	{
-		id: uuidV4(),
-		title: "Movie 5",
-		author: "Author 5",
-		description: "Movie 5 Description",
-		genre: {
-			name: "Movie 5 Genre",
-			description: "Movie 5 Genre Description",
-		},
-		director: {
-			name: "Director 5",
-			bio: "Bio Director 5",
-			birthYear: 2001,
-			deathYear: 2021,
-		},
-		imageURL: "image_5.png",
-		featured: false,
-	},
-];
-
-let lstUsers = [
-	{
-		id: uuidV4(),
-		name: "user 1",
-		favoriteMovies: [],
-	},
-	{
-		id: uuidV4(),
-		name: "user 2",
-		favoriteMovies: ["Movie 1"],
-	},
-	{
-		id: uuidV4(),
-		name: "user 3",
-		favoriteMovies: ["Movie 2", "Movie 5"],
-	},
-];
-
 // Public Routes
 app.route("/")
 	.get((req, res) => {
@@ -364,7 +253,8 @@ app.route("/users/:username")
 					res.status(500)
 						.send("Error: " + err);
 				} else {
-					res.json(deletedUser);
+					res.status(200)
+						.send(`The user with username: ${username} deregistered from the database.`);
 				}
 			});
 	});
@@ -386,7 +276,8 @@ app.route("/users/:username/favorites/:movieID")
 					res.status(500)
 						.send("Error: " + err);
 				} else {
-					res.json(updatedUser);
+					res.status(200)
+						.send(`The movie with ID: ${movieID} added to favorite list of movies of the user: ${username}`);
 				}
 			});
 	})
@@ -406,7 +297,8 @@ app.route("/users/:username/favorites/:movieID")
 					res.status(500)
 						.send("Error: " + err);
 				} else {
-					res.json(updatedUser);
+					res.status(200)
+						.send(`The movie with ID: ${movieID} removed from favorite list of movies of the user: ${username}`);
 				}
 			});
 	});
