@@ -168,82 +168,110 @@ let lstUsers = [
 ];
 
 // Public Routes
-app.get("/", (req, res) => {
-	res.sendFile("/public/index.html", { root: __dirname });
-});
+app.route("/")
+	.get((req, res) => {
+		res.sendFile("/public/index.html", { root: __dirname });
+	});
 
-app.get("/documentation", (req, res) => {
-	res.sendFile("/public/documentation.html", { root: __dirname });
-});
+app.route("/documentation")
+	.get((req, res) => {
+		res.sendFile("/public/documentation.html", { root: __dirname });
+	});
 
 // Routes for Movies
-app.get("/movies", (req, res) => {
-	Movies.find()
-		.then((users) => {
-			res.status(200)
-				.json(users);
-		})
-		.catch((err) => {
-			console.error(err);
-			res.status(500)
-				.send("Error: " + err);
-		});
-});
+app.route("/movies")
+	.get((req, res) => {
+		Movies.find()
+			.then((users) => {
+				res.status(200)
+					.json(users);
+			})
+			.catch((err) => {
+				console.error(err);
+				res.status(500)
+					.send("Error: " + err);
+			});
+	});
 
 // Get a Movie by Title
-app.get("/movies/:title", (req, res) => {
-	const { title } = req.params;
-	const movie = lstMovies.find((movie) => movie.title === title);
-	if (movie)
-		res.status(200)
-			.json(movie);
-	else
-		res.status(404)
-			.send(`No Movie Found with the title: ${title}`);
-});
-
-// Get the genre of a movie by title
-app.get("/movies/genre/:name", (req, res) => {
-	const { name } = req.params;
-	const genre = lstMovies.find((movie) => movie.genre.name === name).genre;
-	if (genre)
-		res.status(200)
-			.json(genre);
-	else
-		res.status(404)
-			.send(`No Genre Found with the name: ${name}`);
-});
-
-// Get the info about a director by name
-app.get("/movies/directors/:name", (req, res) => {
-	const { name } = req.params;
-	const director = lstMovies.find((movie) => movie.director.name === name).director;
-	if (director)
-		res.status(200)
-			.json(director);
-	else
-		res.status(404)
-			.send(`No Director Found with the name: ${name}`);
-});
-
-// Routes for Users
-
-// Get all users (just for the development phase)
-app.get("/users", (req, res) => {
-	Users.find()
-		.then((users) => {
-			res.status(200)
-				.json(users);
-		})
-		.catch((err) => {
+app.route("/movies/:title")
+	.get((req, res) => {
+		const { title } = req.params;
+		Movies.findOne(
+			{ title: title }
+		).then((movie) => {
+			if (movie) {
+				res.status(200)
+					.json(movie);
+			} else {
+				res.status(404)
+					.send(`No Movie Found with the title: ${title}`);
+			}
+		}).catch((err) => {
 			console.error(err);
 			res.status(500)
 				.send("Error: " + err);
 		});
-});
+	});
 
-// Create a new user
+// Get the genre of a movie by name
+app.route("/movies/genres/:name")
+	.get((req, res) => {
+		const { name } = req.params;
+		Genres.findOne(
+			{ name: name }
+		).then((genre) => {
+			if (genre) {
+				res.status(200)
+					.json(genre);
+			} else {
+				res.status(404)
+					.send(`No Genre Found with the name: ${name}`);
+			}
+		}).catch((err) => {
+			console.error(err);
+			res.status(500)
+				.send("Error: " + err);
+		});
+	});
+
+// Get the info about a director by name
+app.route("/movies/directors/:name")
+	.get((req, res) => {
+		const { name } = req.params;
+		Directors.findOne(
+			{ name: name }
+		).then((genre) => {
+			if (genre) {
+				res.status(200)
+					.json(genre);
+			} else {
+				res.status(404)
+					.send(`No Director Found with the name: ${name}`);
+			}
+		}).catch((err) => {
+			console.error(err);
+			res.status(500)
+				.send("Error: " + err);
+		});
+	});
+
+// Routes for Users
 app.route("/users")
+	// Get all users (just for the development phase)
+	.get((req, res) => {
+		Users.find()
+			.then((users) => {
+				res.status(200)
+					.json(users);
+			})
+			.catch((err) => {
+				console.error(err);
+				res.status(500)
+					.send("Error: " + err);
+			})
+	})
+	// Create a new user
 	.post((req, res) => {
 		const { username, pass, email, birth } = req.body;
 		if (username && pass && email) {
@@ -352,7 +380,7 @@ app.route("/users/:username/favorites/:movieID")
 					favList: movieID
 				}
 			},
-			{ new: true }, // This line makes sure that the updated document is returned
+			{ new: true }, // To make sure that the updated document is returned
 			(err, updatedUser) => {
 				if (err) {
 					res.status(500)
@@ -372,7 +400,7 @@ app.route("/users/:username/favorites/:movieID")
 					favList: movieID
 				}
 			},
-			{ new: true }, // This line makes sure that the updated document is returned
+			{ new: true }, // To make sure that the updated document is returned
 			(err, updatedUser) => {
 				if (err) {
 					res.status(500)
