@@ -28,6 +28,7 @@
             title to the user</li>
         <li>Return data about a genre (description) by name</li>
         <li>Return data about a director (bio, birth year, death year) by name</li>
+        <li>Return data about an actor/actress (bio, birth year, death year) by name</li>
         <li>Allow new users to register</li>
         <li>Allow users to update their user info</li>
         <li>Allow existing users to deregister.</li>
@@ -121,6 +122,25 @@
                     </p>
                 </td>
             </tr>
+            <tr>
+                <!-- /movies/actors/:name | GET -->
+                <td>Get information about an actor/actress <br><em>(by "actors's name")</em></td>
+                <td>/movies/actors/:name</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>
+                    A JSON object holding all data about the actor/actress
+                    <p class="text-style__code-paragraph">
+                        { <br>
+                        <span class="text-style__tab-spacing">"_id": Actors's id,</span><br>
+                        <span class="text-style__tab-spacing">"name": Actors's name,</span><br>
+                        <span class="text-style__tab-spacing">"bio": Actors's biography,</span><br>
+                        <span class="text-style__tab-spacing">"birth": Actors's birth year,</span><br>
+                        <span class="text-style__tab-spacing">"death": Actors's death year</span><br>
+                        } <br>
+                    </p>
+                </td>
+            </tr>
             <tr> <!-- /users | GET -->
                 <td>Get a list of all users</td>
                 <td>/users</td>
@@ -207,6 +227,7 @@
                     A JSON object holding new data about the user
                     <p class="text-style__code-paragraph">
                         { <br>
+                            <span class="text-style__tab-spacing">"username": user's new username (optional)</span><br>
                             <span class="text-style__tab-spacing">"pass": user's new password (optional)</span><br>
                             <span class="text-style__tab-spacing">"email": user's new email (optional)</span><br>
                             <span class="text-style__tab-spacing">"birth": user's new birth year (optional)</span><br>

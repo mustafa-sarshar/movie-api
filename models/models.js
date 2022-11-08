@@ -24,7 +24,7 @@ const movieSchema = mongoose.Schema({
     des: { type: String, required: true },
     director_id: { type: mongoose.Schema.Types.ObjectId, ref: "Director" },
     genre_id: { type: mongoose.Schema.Types.ObjectId, ref: "Genre" },
-    actors: [{ type: mongoose.Schema.Types.ObjectId, ref: "Actor" }],
+    stars: [{ type: mongoose.Schema.Types.ObjectId, ref: "Actor" }],
     image_url: String,
     featured: Boolean
 });

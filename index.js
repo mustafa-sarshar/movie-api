@@ -130,10 +130,30 @@ app.route("/movies/directors/:name")
 		const { name } = req.params;
 		Directors.findOne(
 			{ name: name }
-		).then((genre) => {
-			if (genre) {
+		).then((director) => {
+			if (director) {
 				res.status(200)
-					.json(genre);
+					.json(director);
+			} else {
+				res.status(404)
+					.send(`No Director Found with the name: ${name}`);
+			}
+		}).catch((err) => {
+			console.error(err);
+			res.status(500)
+				.send("Error: " + err);
+		});
+	});
+
+app.route("/movies/actors/:name")
+	.get((req, res) => {
+		const { name } = req.params;
+		Actors.findOne(
+			{ name: name }
+		).then((actor) => {
+			if (actor) {
+				res.status(200)
+					.json(actor);
 			} else {
 				res.status(404)
 					.send(`No Director Found with the name: ${name}`);
@@ -214,16 +234,18 @@ app.route("/users/:username")
 			});
 	})
 	// Update a user	-------------------------------------------
-	.put((req, res) => {
+	.put(async (req, res) => {
 		const { username } = req.params;
-		const { pass, email, birth } = req.body;
-		if (username) {
+		const { username: uname, pass, email, birth } = req.body;
+		const duplicationCheck = await User.find({ username: uname }).exec();
+		console.log(duplicationCheck.length);
+		if (duplicationCheck.length === 0) {
 			Users.findOneAndUpdate(
 				{ username: username },
 				{
 					$set:
 					{
-						username: username,
+						username: uname,
 						pass: pass,
 						email: email,
 						birth: birth
@@ -240,7 +262,7 @@ app.route("/users/:username")
 				});
 		} else {
 			res.status(400)		// BAD REQUEST
-				.send("Username is required!!!");
+				.send("The new username is not available!!!");
 		}
 	})
 	// Delete a user	-------------------------------------------

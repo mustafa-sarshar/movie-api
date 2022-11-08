@@ -52,6 +52,36 @@ db.directors.updateOne(
         }
     });
 
+/* Actors ---------------------------------------------
+var actorN = {
+    "name": "",
+    "bio": "",
+    "birth": new Date(""),
+    "death": new Date("")
+}
+*/
+var actor1 = {
+    "name": "JLeonardo DiCaprio",
+    "bio": "Few actors in the world have had a career quite as diverse as Leonardo DiCaprio\'s. DiCaprio has gone from relatively humble beginnings, as a supporting cast member of the sitcom Growing Pains (1985) and low budget horror movies, such as Critters 3 (1991), to a major teenage heartthrob in the 1990s, as the hunky lead actor in movies such as Romeo + Juliet (1996) and Titanic (1997), to then become a leading man in Hollywood blockbusters, made by internationally renowned directors such as Martin Scorsese and Christopher Nolan.",
+    "birth": new Date("1974-11-11"),
+    "death": ""
+}
+var actor2 = {
+    "name": "Billy Zane",
+    "bio": "William George Zane, better known as Billy Zane, was born on February 24, 1966 in Chicago, Illinois, to Thalia (Colovos) and William Zane, both of Greek ancestry. His parents were amateur actors and managed a medical technical school. Billy has an older sister, actress and singer Lisa Zane. Billy was bitten by the acting bug early on. In his early teens, he attended Harand Camp of the Theater Arts in Elkhart Lake, Wisconsin. In 1982, he attended the American School in Switzerland. His high school days were spent at Francis Parker High School in Chicago, Illinois. Daryl Hannah and Jennifer Beals also attended Parker, prior to Billy\'s attendance.",
+    "birth": new Date("1966-02-24"),
+    "death": ""
+}
+var actor3 = {
+    "name": "Kate Winslet",
+    "bio": "Ask Kate Winslet what she likes about any of her characters, and the word 'ballsy' is bound to pop up at least once. The British actress has made a point of eschewing straightforward pretty-girl parts in favor of more devilish damsels; as a result, she\'s built an eclectic resume that runs the gamut from Shakespearean tragedy to modern-day mysticism and erotica.",
+    "birth": new Date("1975-10-05"),
+    "death": ""
+}
+
+db.actors.insert([actor1, actor2, actor3]);
+
+
 /*  Genres ---------------------------------------------------
 var genreN = {
     "name": "",
@@ -238,6 +268,18 @@ db.movies.update(
     {
         $set: {
             "des": "The fictional character Spider-Man, a comic book superhero created by Stan Lee and Steve Ditko and featured in Marvel Comics publications, has appeared as a main character in numerous theatrical and made-for-television films."
+    }}
+);
+
+db.movies.update(
+    { "title": "Titanic" },
+    {
+        $set: {
+            "stars": [
+                db.actors.findOne({ "name": "JLeonardo DiCaprio" })._id,
+                db.actors.findOne({ "name": "Billy Zane" })._id,
+                db.actors.findOne({ "name": "Kate Winslet" })._id
+            ]
     }}
 );
 
