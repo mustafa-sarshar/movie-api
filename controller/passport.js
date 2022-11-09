@@ -19,13 +19,11 @@ passport.use(new LocalStrategy(
                     return done(err);
                 }
                 if (!user) {
-                    console.log("LocalStrategy: Username not correct!!!");
                     return done(null, false, { message: "LocalStrategy: Incorrect username or password." });
                 }
-                // if (!user.verifyPassword(pass)) {
-                //     console.log("LocalStrategy: Password not verified!!!")
-                //     return done(null, false);
-                // }
+                if (!user.verifyPassword(pass)) {
+                    return done(null, false, { message: "LocalStrategy: Incorrect password." });
+                }
                 console.log("LocalStrategy: Finished!!!");
                 return done(null, user);
             }
