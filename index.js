@@ -189,7 +189,7 @@ app.route("/movies/actors/:name")
 app.route("/users")
 	// Get all users (just for the development phase)
 	.get(
-		passport.authenticate("jwt", { session: false }),
+		// passport.authenticate("jwt", { session: false }),
 		(req, res) => {
 		Users.find()
 			.then((users) => {
@@ -275,14 +275,20 @@ app.route("/users/:username")
 	)
 	// Update a user	-------------------------------------------
 	.put(
-		passport.authenticate("jwt", { session: false }),
 		[
+			passport.authenticate("jwt", { session: false }),
 			check("username", "Username is required").isLength({ min: 5 }),
 			check("username", "Username contains non alphanumeric characters - not allowed.").isAlphanumeric(),
 			check("pass", "Password is required").not().isEmpty(),
 			check("email", "Email does not appear to be valid").isEmail()
 		],
 		async (req, res) => {
+			// check the validation object for errors
+			const errors = validationResult(req);
+			if (!errors.isEmpty()) {
+				return res.status(422)
+					.json({ errors: errors.array() });
+			}
 			const { username } = req.params;
 			const { username: uname, pass, email, birth } = req.body;
 			const duplicationCheck = await User.find({ username: uname }).exec();
@@ -392,7 +398,7 @@ app.use(
 );
 
 mongoose.connection.once("open", () => {
-    console.log("Connected to Database");
-    // Start the server and listen to events on port ...
-    app.listen(PORT, () => { console.log(`Server is running on port ${PORT}`); });
+	console.log("Connected to Database");
+	// Start the server and listen to events on port ...
+	app.listen(PORT, "0.0.0.0", () => { console.log(`Server is running on port ${PORT}`); });
 });
