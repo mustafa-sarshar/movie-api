@@ -19,11 +19,6 @@ const salt = bcrypt.genSaltSync(10);
 const app = express();
 const { Director: Directors, Actor: Actors, Genre: Genres, Movie: Movies, User: Users, User } = require('./models/models.js');
 
-// Directors.collection.drop();
-// Genres.collection.drop();
-// Movies.collection.drop();
-// Users.collection.drop();
-
 mongoose.connect(
 	process.env.DATABASE_URI,
 	{ useNewUrlParser: true, useUnifiedTopology: true }
@@ -59,7 +54,7 @@ app.route("/documentation")
 
 // Routes for Movies
 app.route("/movies")
-	.get((req, res) => {
+	.get(passport.authenticate("jwt", { session: false }), (req, res) => {
 		Movies.find()
 			.then((users) => {
 				res.status(200)
@@ -74,7 +69,7 @@ app.route("/movies")
 
 // Get a Movie by Title
 app.route("/movies/:title")
-	.get((req, res) => {
+	.get(passport.authenticate("jwt", { session: false }), (req, res) => {
 		const { title } = req.params;
 		Movies.findOne(
 			{ title: title }
@@ -95,7 +90,7 @@ app.route("/movies/:title")
 
 // Get the genre of a movie by name
 app.route("/movies/genres/:name")
-	.get((req, res) => {
+	.get(passport.authenticate("jwt", { session: false }), (req, res) => {
 		const { name } = req.params;
 		Genres.findOne(
 			{ name: name }
@@ -116,7 +111,7 @@ app.route("/movies/genres/:name")
 
 // Get the info about a director by name
 app.route("/movies/directors/:name")
-	.get((req, res) => {
+	.get(passport.authenticate("jwt", { session: false }), (req, res) => {
 		const { name } = req.params;
 		Directors.findOne(
 			{ name: name }
@@ -136,7 +131,7 @@ app.route("/movies/directors/:name")
 	});
 
 app.route("/movies/actors/:name")
-	.get((req, res) => {
+	.get(passport.authenticate("jwt", { session: false }), (req, res) => {
 		const { name } = req.params;
 		Actors.findOne(
 			{ name: name }
@@ -158,7 +153,7 @@ app.route("/movies/actors/:name")
 // Routes for Users
 app.route("/users")
 	// Get all users (just for the development phase)
-	.get((req, res) => {
+	.get(passport.authenticate("jwt", { session: false }), (req, res) => {
 		Users.find()
 			.then((users) => {
 				res.status(200)
@@ -211,7 +206,7 @@ app.route("/users")
 
 app.route("/users/:username")
 	// Find a user		-------------------------------------------
-	.get((req, res) => {
+	.get(passport.authenticate("jwt", { session: false }), (req, res) => {
 		const { username } = req.params;
 		Users.findOne({ username: username })
 			.then((user) => {
@@ -224,7 +219,7 @@ app.route("/users/:username")
 			});
 	})
 	// Update a user	-------------------------------------------
-	.put(async (req, res) => {
+	.put(passport.authenticate("jwt", { session: false }), async (req, res) => {
 		const { username } = req.params;
 		const { username: uname, pass, email, birth } = req.body;
 		const duplicationCheck = await User.find({ username: uname }).exec();
@@ -256,7 +251,7 @@ app.route("/users/:username")
 		}
 	})
 	// Delete a user	-------------------------------------------
-	.delete((req, res) => {
+	.delete(passport.authenticate("jwt", { session: false }), (req, res) => {
 		const { username } = req.params;
 		Users.findOneAndRemove(
 			{ username: username },
@@ -273,7 +268,7 @@ app.route("/users/:username")
 
 // Add a movie to the favorite movies -----------------------------
 app.route("/users/:username/favorites/:movieID")
-	.patch((req, res) => {
+	.patch(passport.authenticate("jwt", { session: false }), (req, res) => {
 		const { username, movieID } = req.params;
 		Users.findOneAndUpdate(
 			{ username: username },
@@ -294,7 +289,7 @@ app.route("/users/:username/favorites/:movieID")
 			});
 	})
 	// Delete from favorite movies --------------------------------
-	.delete((req, res) => {
+	.delete(passport.authenticate("jwt", { session: false }), (req, res) => {
 		const { username, movieID } = req.params;
 		Users.findOneAndUpdate(
 			{ username: username },

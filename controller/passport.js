@@ -6,11 +6,11 @@ const
 
 passport.use(new LocalStrategy(
     {
-        usernameField: 'username',
-        passwordField: 'pass'
+        usernameField: "username",
+        passwordField: "pass"
     },
-    (username, password, done) => {
-        console.log(`LocalStrategy: username: ${username}, password: ${password}`);
+    (username, pass, done) => {
+        console.log(`LocalStrategy: username: ${username}, password: ${pass}`);
         Users.findOne(
             { username: username },
             (err, user) => {
@@ -22,10 +22,10 @@ passport.use(new LocalStrategy(
                     console.log("LocalStrategy: Username not correct!!!");
                     return done(null, false, { message: "LocalStrategy: Incorrect username or password." });
                 }
-                if (!user.verifyPassword(password)) {
-                    console.log("LocalStrategy: Password not verified!!!")
-                    return done(null, false);
-                }
+                // if (!user.verifyPassword(pass)) {
+                //     console.log("LocalStrategy: Password not verified!!!")
+                //     return done(null, false);
+                // }
                 console.log("LocalStrategy: Finished!!!");
                 return done(null, user);
             }
@@ -35,11 +35,12 @@ passport.use(new LocalStrategy(
 
 const JWTStrategyOpts = {}
 JWTStrategyOpts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-JWTStrategyOpts.secretOrKey = "your_jwt_secret";
+JWTStrategyOpts.secretOrKey = process.env.SECRET_KEY;
 
 passport.use(new JWTStrategy(
     JWTStrategyOpts,
     (jwtPayload, done) => {
+        console.log("JWTStrategy:", jwtPayload._id);
         return Users.findById(jwtPayload._id)
             .then((user) => {
                 return done(null, user);
