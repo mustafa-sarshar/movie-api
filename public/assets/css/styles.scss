@@ -4,6 +4,8 @@ $color-table__border--dark: #000000;
 $color-table__td__bg--light: #d3d3d3;
 $color-table__td__bg--dark: #808080;
 
+$size-table-breakpoint--1: 1705px;    // screen width in pixels
+
 body {
     background-color: #b1b1b1;
 }
@@ -12,8 +14,10 @@ body {
     &-table {
         margin: auto;
         border-collapse: collapse;
+        table-layout: auto;
+        min-width: 1700px;
         * {
-            padding: 10px;            
+            padding: 10px;
         }
         thead {
             tr {
@@ -31,7 +35,7 @@ body {
                     filter: invert(1);
                 }
             }
-            td {                
+            td {
                 &:first-child {
                     border-right: 2px solid $color-table__border--dark;
                 }
@@ -44,6 +48,10 @@ body {
                 border-top: 2px solid $color-table__border--dark;
                 font-style: italic;
             }
+        }
+        &__container {
+            width: 100%;
+            overflow-x: scroll;
         }
     }
 }

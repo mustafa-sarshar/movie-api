@@ -5,6 +5,8 @@ body {
 .my-table {
   margin: auto;
   border-collapse: collapse;
+  table-layout: auto;
+  min-width: 1700px;
 }
 .my-table * {
   padding: 10px;
@@ -30,6 +32,10 @@ body {
   text-align: center;
   border-top: 2px solid #000000;
   font-style: italic;
+}
+.my-table__container {
+  width: 100%;
+  overflow-x: scroll;
 }
 
 .text-style__code-paragraph {
