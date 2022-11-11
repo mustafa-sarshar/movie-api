@@ -63,7 +63,7 @@ app.route("/documentation")
 // Routes for Movies
 app.route("/movies")
 	.get(
-		passport.authenticate("jwt", { session: false }),
+		// passport.authenticate("jwt", { session: false }),
 		(req, res) => {
 			Movies.find()
 				.then((users) => {
@@ -177,7 +177,7 @@ app.route("/movies/actors/:name")
 app.route("/users")
 	// Get all users (just for the development phase)
 	.get(
-		passport.authenticate("jwt", { session: false }),
+		// passport.authenticate("jwt", { session: false }),
 		(req, res) => {
 		Users.find()
 			.then((users) => {
