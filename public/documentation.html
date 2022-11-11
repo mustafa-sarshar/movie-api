@@ -27,8 +27,8 @@
         <li>Return data (description, genre, director, image URL, whether it is featured or not) about a single movie by
             title to the user</li>
         <li>Return data about a genre (description) by name</li>
-        <li>Return data about a director (bio, birth year, death year) by name</li>
-        <li>Return data about an actor/actress (bio, birth year, death year) by name</li>
+        <li>Return data about a director (bio, birth date, death date) by name</li>
+        <li>Return data about an actor/actress (bio, birth date, death date) by name</li>
         <li>Allow new users to register</li>
         <li>Allow users to update their user info</li>
         <li>Allow existing users to deregister.</li>
@@ -116,8 +116,8 @@
                             <span class="text-style__tab-spacing">"_id": Director's id,</span><br>
                             <span class="text-style__tab-spacing">"name": Director's name,</span><br>
                             <span class="text-style__tab-spacing">"bio": Director's biography,</span><br>
-                            <span class="text-style__tab-spacing">"birth": Director's birth year,</span><br>
-                            <span class="text-style__tab-spacing">"death": Director's death year</span><br>
+                            <span class="text-style__tab-spacing">"birth": Director's birth date,</span><br>
+                            <span class="text-style__tab-spacing">"death": Director's death date</span><br>
                         } <br>
                     </p>
                 </td>
@@ -135,8 +135,8 @@
                         <span class="text-style__tab-spacing">"_id": Actors's id,</span><br>
                         <span class="text-style__tab-spacing">"name": Actors's name,</span><br>
                         <span class="text-style__tab-spacing">"bio": Actors's biography,</span><br>
-                        <span class="text-style__tab-spacing">"birth": Actors's birth year,</span><br>
-                        <span class="text-style__tab-spacing">"death": Actors's death year</span><br>
+                        <span class="text-style__tab-spacing">"birth": Actors's birth date,</span><br>
+                        <span class="text-style__tab-spacing">"death": Actors's death date</span><br>
                         } <br>
                     </p>
                 </td>
@@ -159,7 +159,7 @@
                             <span class="text-style__tab-spacing">"username": User's username (required),</span><br>
                             <span class="text-style__tab-spacing">"pass": User's password (required),</span><br>
                             <span class="text-style__tab-spacing">"email": User's email (required),</span><br>
-                            <span class="text-style__tab-spacing">"birth": User's birth year (optional)</span><br>
+                            <span class="text-style__tab-spacing">"birth": User's birth date (yyyy-mm-dd) (optional)</span><br>
                         } <br>
                     </p>
                 </td>
@@ -171,7 +171,7 @@
                             <span class="text-style__tab-spacing">"username": User's username,</span><br>
                             <span class="text-style__tab-spacing">"pass": User's password,</span><br>
                             <span class="text-style__tab-spacing">"email": User's email,</span><br>
-                            <span class="text-style__tab-spacing">"birth": User's birth year,</span><br>
+                            <span class="text-style__tab-spacing">"birth": User's birth date,</span><br>
                             <span class="text-style__tab-spacing">"favList": [</span><br>
                             <span class="text-style__tab-spacing">
                                 <span class="text-style__tab-spacing">User's favorite movie 1,</span>
@@ -203,7 +203,7 @@
                             <span class="text-style__tab-spacing">"username": User's username,</span><br>
                             <span class="text-style__tab-spacing">"pass": User's password,</span><br>
                             <span class="text-style__tab-spacing">"email": User's email,</span><br>
-                            <span class="text-style__tab-spacing">"birth": User's birth year,</span><br>
+                            <span class="text-style__tab-spacing">"birth": User's birth date,</span><br>
                             <span class="text-style__tab-spacing">"favList": [</span><br>
                             <span class="text-style__tab-spacing">
                                 <span class="text-style__tab-spacing">User's favorite movie 1,</span>
@@ -230,7 +230,7 @@
                             <span class="text-style__tab-spacing">"username": user's new username (required),</span><br>
                             <span class="text-style__tab-spacing">"pass": user's new password (required),</span><br>
                             <span class="text-style__tab-spacing">"email": user's new email (required),</span><br>
-                            <span class="text-style__tab-spacing">"birth": user's new birth date (YYYY-MM-DD) (optional)</span><br>
+                            <span class="text-style__tab-spacing">"birth": user's new birth date (yyyy-mm-dd) (optional)</span><br>
                         } <br>
                     </p>
                 </td>
@@ -242,7 +242,7 @@
                             <span class="text-style__tab-spacing">"username": User's username,</span><br>
                             <span class="text-style__tab-spacing">"pass": User's password,</span><br>
                             <span class="text-style__tab-spacing">"email": User's email,</span><br>
-                            <span class="text-style__tab-spacing">"birth": User's birth date (YYYY-MM-DD),</span><br>
+                            <span class="text-style__tab-spacing">"birth": User's birth date,</span><br>
                             <span class="text-style__tab-spacing">"favList": [</span><br>
                             <span class="text-style__tab-spacing">
                                 <span class="text-style__tab-spacing">User's favorite movie 1,</span>
