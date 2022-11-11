@@ -4,21 +4,19 @@ require("dotenv").config();
 // Requirements
 const
 	express = require("express"),
-	{ check, validationResult } = require('express-validator'),
+	{ check, validationResult } = require("express-validator"),
 	morgan = require("morgan"),
 	fs = require("fs"),
 	path = require("path"),
 	{ requestDateTimeNow } = require("./utils/middleware"),
 	bodyParser = require("body-parser"),
 	methodOverride = require("method-override"),
-	mongoose = require('mongoose'),
+	mongoose = require("mongoose"),
 	passport = require("passport");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
-const { Director: Directors, Actor: Actors, Genre: Genres, Movie: Movies, User: Users, User } = require('./models/models.js');
-
-Users.collection.drop();
+const { Director: Directors, Actor: Actors, Genre: Genres, Movie: Movies, User: Users, User } = require("./models/models.js");
 
 mongoose.connect(
 	process.env.DATABASE_URI,
@@ -63,7 +61,7 @@ app.route("/documentation")
 // Routes for Movies
 app.route("/movies")
 	.get(
-		// passport.authenticate("jwt", { session: false }),
+		passport.authenticate("jwt", { session: false }),
 		(req, res) => {
 			Movies.find()
 				.then((users) => {
@@ -177,7 +175,7 @@ app.route("/movies/actors/:name")
 app.route("/users")
 	// Get all users (just for the development phase)
 	.get(
-		// passport.authenticate("jwt", { session: false }),
+		passport.authenticate("jwt", { session: false }),
 		(req, res) => {
 		Users.find()
 			.then((users) => {
