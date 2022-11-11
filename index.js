@@ -12,12 +12,13 @@ const
 	bodyParser = require("body-parser"),
 	methodOverride = require("method-override"),
 	mongoose = require('mongoose'),
-	cors = require("cors"),
 	passport = require("passport");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 const { Director: Directors, Actor: Actors, Genre: Genres, Movie: Movies, User: Users, User } = require('./models/models.js');
+
+Users.collection.drop();
 
 mongoose.connect(
 	process.env.DATABASE_URI,
@@ -32,21 +33,8 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS.split(";");
-app.use(cors(	// Apply Cross-Origin Resource Sharing (CORS)
-	{
-		origin: (origin, callback) => {
-			if (!origin)
-				return callback(null, true);
-			if (allowedOrigins.indexOf(origin) === -1) { // If a specific origin isn’t found on the list of allowed origins
-				const message = "The CORS policy for this application doesn’t allow access from origin " + origin;
-				return callback(new Error(message), false);
-			}
-			return callback(null, true);
-		},
-		optionsSuccessStatus: 200
-	}
-));
+const { corsMiddleware } = require("./config/cors");
+app.use(corsMiddleware);		// Apply Cross-Origin Resource Sharing (CORS)
 
 const auth = require("./controller/auth")(app);
 require("./controller/passport");
