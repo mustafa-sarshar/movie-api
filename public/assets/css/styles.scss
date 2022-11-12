@@ -19,6 +19,15 @@ body {
         * {
             padding: 10px;
         }
+        td,
+        th {
+            &:nth-child(1){
+                max-width: 250px;
+            }
+            &:nth-child(2){
+                min-width: 300px;
+            }
+        }
         thead {
             tr {
                 background-color: $color-table__bg--light-1;

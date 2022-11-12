@@ -11,6 +11,14 @@ body {
 .my-table * {
   padding: 10px;
 }
+.my-table td:nth-child(1),
+.my-table th:nth-child(1) {
+  max-width: 250px;
+}
+.my-table td:nth-child(2),
+.my-table th:nth-child(2) {
+  min-width: 300px;
+}
 .my-table thead tr {
   background-color: #e4e4de;
   text-align: center;

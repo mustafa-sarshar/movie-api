@@ -29,6 +29,7 @@
         <li>Return data about a genre (description) by name</li>
         <li>Return data about a director (bio, birth date, death date) by name</li>
         <li>Return data about an actor/actress (bio, birth date, death date) by name</li>
+        <li>Allow users to login</li>
         <li>Allow new users to register</li>
         <li>Allow users to update their user info</li>
         <li>Allow existing users to deregister.</li>
@@ -71,7 +72,7 @@
                             <span class="text-style__tab-spacing">"_id": Movie's id,</span><br>
                             <span class="text-style__tab-spacing">"title": Movie's title,</span><br>
                             <span class="text-style__tab-spacing">"des": Movie's description of the Movie,</span><br>
-                            <span class="text-style__tab-spacing">"director_id": Director's id,</span><br>                        
+                            <span class="text-style__tab-spacing">"director_id": Director's id,</span><br>
                             <span class="text-style__tab-spacing">"genre_id": Genre's id,</span><br>
                             <span class="text-style__tab-spacing">"actors": [</span><br>
                             <span class="text-style__tab-spacing">
@@ -139,6 +140,71 @@
                             <span class="text-style__tab-spacing">"bio": Actors's biography,</span><br>
                             <span class="text-style__tab-spacing">"birth": Actors's birth date,</span><br>
                             <span class="text-style__tab-spacing">"death": Actors's death date</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- /login | POST -->
+                    <td>
+                        Login in to the website <br><em>(by "user's username and password")</em><br><br>
+                        The local authentication strategy: <br>
+                        requests will be authenticated based on the credentials submitted through an HTML-based login form.
+                    </td>
+                    <td>
+                        /login?username=&lt;username&gt;&pass=&lt;pass&gt; <br><br><br><br>
+                        Set the query parameters as follows: <br>
+                        <span class="text-style__tab-spacing">username = user's username</span><br>
+                        <span class="text-style__tab-spacing">pass = user's password</span><br>
+                    </td>
+                    <td>POST</td>
+                    <td>None</td>
+                    <td>
+                        A JSON object holding data about all the user and the authentication token
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"user": {</span><br>
+                                <span class="text-style__tab-spacing">
+                                    <span class="text-style__tab-spacing">"_id": User's id,</span>
+                                </span><br>
+                                <span class="text-style__tab-spacing">
+                                    <span class="text-style__tab-spacing">"username": User's username,</span>
+                                </span><br>
+                                <span class="text-style__tab-spacing">
+                                    <span class="text-style__tab-spacing">"pass": User's password,</span>
+                                </span><br>
+                                <span class="text-style__tab-spacing">
+                                    <span class="text-style__tab-spacing">"email": User's email,</span>
+                                </span><br>
+                                <span class="text-style__tab-spacing">
+                                    <span class="text-style__tab-spacing">"birth": User's birth date (yyyy-mm-dd),</span>
+                                </span><br>
+                                <span class="text-style__tab-spacing">
+                                    <span class="text-style__tab-spacing">"favList": [</span><br>
+                                        <span class="text-style__tab-spacing">
+                                            <span class="text-style__tab-spacing">
+                                                <span class="text-style__tab-spacing">User's favorite movie 1,</span>
+                                            </span>
+                                        </span><br>
+                                        <span class="text-style__tab-spacing">
+                                            <span class="text-style__tab-spacing">
+                                                <span class="text-style__tab-spacing">User's favorite movie 2,</span>
+                                            </span>
+                                        </span><br>
+                                        <span class="text-style__tab-spacing">
+                                            <span class="text-style__tab-spacing">
+                                                <span class="text-style__tab-spacing">User's favorite movie 3,</span>
+                                            </span>
+                                        </span><br>
+                                <span class="text-style__tab-spacing">
+                                    <span class="text-style__tab-spacing">],</span>
+                                </span><br>
+                                <span class="text-style__tab-spacing">
+                                    <span class="text-style__tab-spacing">"_v": Version's number,</span>
+                                </span><br>
+                            <span class="text-style__tab-spacing">},</span><br>
+                            <span class="text-style__tab-spacing">"token": User's JSON Web Token</span><br>
+                            </span>
                             } <br>
                         </p>
                     </td>
