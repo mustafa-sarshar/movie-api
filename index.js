@@ -4,7 +4,7 @@ require("dotenv").config();
 // Requirements
 const
 	express = require("express"),
-	{ check, validationResult } = require("express-validator"),
+	{ check } = require("express-validator"),
 	morgan = require("morgan"),
 	fs = require("fs"),
 	path = require("path"),
