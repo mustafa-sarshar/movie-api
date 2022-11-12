@@ -48,6 +48,14 @@ body {
                 &:first-child {
                     border-right: 2px solid $color-table__border--dark;
                 }
+                &:nth-child(3){
+                    text-align: center;
+                    width: 150px;
+                }
+                &:nth-child(4),
+                &:nth-child(5){
+                    min-width: 450px;
+                }
             }
         }
         tfoot {
