@@ -20,11 +20,11 @@ const swaggerApiOptions = {
         },
         servers: [
             {
-                url: "http://localhost:3000/books",
+                url: "http://localhost:8080/movies",
             },
         ],
     },
-    apis: ["./routes/books.js"],
+    apis: ["../documentation/movies.js"],
 };
 
 const swaggerJsdocSpecs = swaggerJsdoc(swaggerApiOptions);

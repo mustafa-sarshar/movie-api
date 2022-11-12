@@ -51,7 +51,6 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(methodOverride());
 
 app.use(express.static(path.join(__dirname, "public")));	// Public files
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsdocSpecs));	// Swagger UI for API Documentation
 
 // Public Routes
 app.route("/")
@@ -155,6 +154,12 @@ app.use(
 			.send("Something broke!");
 	}
 );
+
+app.use(
+	"/api-docs",
+	swaggerUi.serve,
+	swaggerUi.setup(swaggerJsdocSpecs, { explorer: true })
+);	// Swagger UI for API Documentation
 
 mongoose.connection.once("open", () => {
 	console.log("Connected to Database");
