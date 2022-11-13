@@ -1,4 +1,5 @@
 const swaggerJsdoc = require("swagger-jsdoc");
+const PORT = process.env.PORT || 3000;
     
 const swaggerApiOptions = {
     definition: {
@@ -29,4 +30,36 @@ const swaggerApiOptions = {
 
 const swaggerJsdocSpecs = swaggerJsdoc(swaggerApiOptions);
 
-module.exports = { swaggerJsdocSpecs };
+const swaggerJSON = {
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "movie-API",
+        "description": "Swagger documentation for API endpoints",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": `localhost:${PORT}`,
+    "basePath": "",
+    "tags"
+    "definitions": {
+        "_id": {
+            "properties": {
+                "ObjectId": {
+                    "type": "string"
+                }
+            }
+        },
+        "username": {
+            "properties": {
+                "prop": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
+
+module.exports = { swaggerJsdocSpecs, swaggerJSON };

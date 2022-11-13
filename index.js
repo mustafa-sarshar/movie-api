@@ -15,11 +15,11 @@ const
 	swaggerUi = require("swagger-ui-express");
 
 const
-	{ requestDateTimeNow } = require("./utils/middleware.js"),
+	{ requestDateTimeNow } = require("./utils/middleware"),
 	{ corsMiddleware } = require("./config/cors"),
-	{ swaggerJsdocSpecs } = require("./controller/api_docs.js"),
-	{ getMovies, getMovieByTitle, getGenreByName, getDirectorByName, getActorByName } = require("./routes/movies.js"),
-	{ getUsers, createNewUser, findUser, updateUser, deleteUser, addMovieToFavList, deleteMovieFromFavList } = require("./routes/users.js");
+	swaggerJSON = require("./public/swagger"),
+	{ getMovies, getMovieByTitle, getGenreByName, getDirectorByName, getActorByName } = require("./routes/movies"),
+	{ getUsers, createNewUser, findUser, updateUser, deleteUser, addMovieToFavList, deleteMovieFromFavList } = require("./routes/users");
 
 const inputFieldCheckers = [
 	check("username", "Username is required").isLength({ min: 5 }),
@@ -36,7 +36,6 @@ mongoose.connect(
 // create a write stream (in append mode) a ‘log.txt’ file is created in root directory
 const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), { flags: "a" });
 
-const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(requestDateTimeNow);
@@ -70,34 +69,34 @@ app.route("/documentation")
 // Routes for Movies
 app.route("/movies")
 	.get(
-		passport.authenticate("jwt", { session: false }),
+		// passport.authenticate("jwt", { session: false }),
 		getMovies
 	);
 
 // Get a Movie by Title
 app.route("/movies/:title")
 	.get(
-		passport.authenticate("jwt", { session: false }),
+		// passport.authenticate("jwt", { session: false }),
 		getMovieByTitle
 	);
 
 // Get the genre of a movie by name
 app.route("/movies/genres/:name")
 	.get(
-		passport.authenticate("jwt", { session: false }),
+		// passport.authenticate("jwt", { session: false }),
 		getGenreByName
 	);
 
 // Get the info about a director by name
 app.route("/movies/directors/:name")
 	.get(
-		passport.authenticate("jwt", { session: false }),
+		// passport.authenticate("jwt", { session: false }),
 		getDirectorByName
 	);
 
 app.route("/movies/actors/:name")
 	.get(
-		passport.authenticate("jwt", { session: false }),
+		// passport.authenticate("jwt", { session: false }),
 		getActorByName
 	);
 
@@ -155,12 +154,14 @@ app.use(
 	}
 );
 
-app.use(
-	"/api-docs",
+app.use(	// Swagger UI for API Documentation
+	"/swagger",
 	swaggerUi.serve,
-	swaggerUi.setup(swaggerJsdocSpecs, { explorer: true })
-);	// Swagger UI for API Documentation
+	// swaggerUi.setup(swaggerJsdocSpecs, { explorer: true })
+	swaggerUi.setup(swaggerJSON, { explorer: true })
+);	
 
+const PORT = process.env.PORT || 3000;
 mongoose.connection.once("open", () => {
 	console.log("Connected to Database");
 	// Start the server and listen to events on port ...

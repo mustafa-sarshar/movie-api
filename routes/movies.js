@@ -9,7 +9,7 @@ const getMovies = (req, res) => {
         .catch((err) => {
             console.error(err);
             res.status(500)
-                .send("Error: " + err);
+                .json({ "message": err.message });
         });
 }
 
@@ -28,7 +28,7 @@ const getMovieByTitle = (req, res) => {
     }).catch((err) => {
         console.error(err);
         res.status(500)
-            .send("Error: " + err);
+            .json({ "message": err.message });
     });
 }
 
@@ -47,7 +47,7 @@ const getGenreByName = (req, res) => {
     }).catch((err) => {
         console.error(err);
         res.status(500)
-            .send("Error: " + err);
+            .json({ "message": err.message });
     });
 }
 
@@ -66,7 +66,7 @@ const getDirectorByName = (req, res) => {
     }).catch((err) => {
         console.error(err);
         res.status(500)
-            .send("Error: " + err);
+            .json({ "message": err.message });
     });
 }
 
@@ -85,7 +85,7 @@ const getActorByName = (req, res) => {
     }).catch((err) => {
         console.error(err);
         res.status(500)
-            .send("Error: " + err);
+            .json({ "message": err.message });
     });
 }
 
