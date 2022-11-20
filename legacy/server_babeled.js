@@ -16,13 +16,17 @@ http.createServer(function (request, response) {
         filePath = "index.html";
     }
 
-    fs.appendFile("log.txt", "URL: " + addr + "\nTimestamp: " + new Date() + "\n\n", function (err) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log("Added to log.");
+    fs.appendFile(
+        "log.txt",
+        "URL: " + addr + "\nTimestamp: " + new Date() + "\n\n",
+        function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("Added to log.");
+            }
         }
-    });
+    );
 
     fs.readFile(filePath, function (err, data) {
         if (err) {

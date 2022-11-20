@@ -1,5 +1,4 @@
-const
-    mongoose = require("mongoose"),
+const mongoose = require("mongoose"),
     bcrypt = require("bcryptjs");
 
 const salt = bcrypt.genSaltSync(10);
@@ -8,19 +7,19 @@ const directorSchema = mongoose.Schema({
     name: { type: String, required: true },
     bio: String,
     birth: Date,
-    death: Date
+    death: Date,
 });
 
 const genreSchema = mongoose.Schema({
     name: { type: String, required: true },
-    des: String
+    des: String,
 });
 
 const actorSchema = mongoose.Schema({
     name: { type: String, required: true },
     bio: String,
     birth: Date,
-    death: Date
+    death: Date,
 });
 
 const movieSchema = mongoose.Schema({
@@ -30,7 +29,7 @@ const movieSchema = mongoose.Schema({
     genre_id: { type: mongoose.Schema.Types.ObjectId, ref: "Genre" },
     stars: [{ type: mongoose.Schema.Types.ObjectId, ref: "Actor" }],
     image_url: String,
-    featured: Boolean
+    featured: Boolean,
 });
 
 const userSchema = mongoose.Schema({
@@ -38,7 +37,7 @@ const userSchema = mongoose.Schema({
     pass: { type: String, required: true },
     email: { type: String, required: true },
     birth: Date,
-    favList: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movie" }]
+    favList: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movie" }],
 });
 
 userSchema.statics.hashPassword = (password) => {

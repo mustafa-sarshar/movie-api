@@ -15,24 +15,23 @@
         {
             "name": "Movies",
             "description": "API for movies"
+        },
+        {
+            "name": "Genres",
+            "description": "API for genres"
+        },
+        {
+            "name": "Users",
+            "description": "API for users"
         }
     ],
-    "schemes": [
-        "http",
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
+    "schemes": ["http", "https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
     "paths": {
         "/movies": {
             "get": {
-                "tags": [
-                    "Movies"
-                ],
+                "tags": ["Movies"],
                 "summary": "Get all movies",
                 "responses": {
                     "200": {
@@ -49,9 +48,7 @@
         },
         "/movies/{title}": {
             "get": {
-                "tags": [
-                    "Movies"
-                ],
+                "tags": ["Movies"],
                 "parameters": [
                     {
                         "in": "path",
@@ -76,9 +73,7 @@
         },
         "/movies/genres/{name}": {
             "get": {
-                "tags": [
-                    "Genres"
-                ],
+                "tags": ["Genres"],
                 "parameters": [
                     {
                         "in": "path",
@@ -101,7 +96,7 @@
                     "400": {
                         "description": "Bad request",
                         "examples": {
-                            "message": "No Genre Found with the name {name}"                            
+                            "message": "No Genre Found with the name {name}"
                         }
                     }
                 }
@@ -109,9 +104,7 @@
         },
         "/movies/directors/{name}": {
             "get": {
-                "tags": [
-                    "Directors"
-                ],
+                "tags": ["Directors"],
                 "summary": "Get info about a specific director",
                 "responses": {
                     "200": {
@@ -125,9 +118,7 @@
         },
         "/users": {
             "get": {
-                "tags": [
-                    "Users"
-                ],
+                "tags": ["Users"],
                 "summary": "Get all users",
                 "responses": {
                     "200": {
