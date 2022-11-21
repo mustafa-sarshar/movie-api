@@ -48,7 +48,6 @@ app.use("/users", require(path.join(__dirname, "routes", "users.js")));
 app.route("/").get((req, res) => {
     res.sendFile("/public/index.html", { root: __dirname });
 });
-
 app.route("/documentation").get((req, res) => {
     res.sendFile("/public/documentation.html", { root: __dirname });
 });
@@ -59,8 +58,8 @@ app.use((err, req, res, next) => {
     res.status(500).send("Something broke!");
 });
 
+// Swagger UI for API Documentation
 app.use(
-    // Swagger UI for API Documentation
     "/swagger",
     swaggerUi.serve,
     // swaggerUi.setup(swaggerJsdocSpecs, { explorer: true })
