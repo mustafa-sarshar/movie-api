@@ -9,7 +9,7 @@
             "url": "https://opensource.org/licenses/MIT"
         }
     },
-    "host": "https://musto-movie-api.herokuapp.com/",
+    "host": "https://musto-movie-api.herokuapp.com",
     "basePath": "",
     "tags": [
         {
