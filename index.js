@@ -15,14 +15,10 @@ const express = require("express"),
 
 const { requestDateTimeNow } = require("./utils/middleware"),
     { corsMiddleware } = require("./config/cors"),
-    swaggerJSON = require("./public/swagger"),
-    {
-        getMovies,
-        getMovieByTitle,
-        getGenreByName,
-        getDirectorByName,
-        getActorByName,
-    } = require("./routes/movies"),
+    swaggerJSON = require("./public/swagger");
+
+// Import Routes
+const
     {
         getUsers,
         createNewUser,
@@ -33,11 +29,12 @@ const { requestDateTimeNow } = require("./utils/middleware"),
         deleteMovieFromFavList,
     } = require("./routes/users");
 
+// Set Input Validations
 const inputFieldCheckers = [
     check("username", "Username is required").isLength({ min: 5 }),
     check(
         "username",
-        "Username contains non alphanumeric characters - not allowed."
+        "Username contains non alphanumeric characters - not allowed.",
     ).isAlphanumeric(),
     check("pass", "Password is required").not().isEmpty(),
     check("email", "Email does not appear to be valid").isEmail(),
@@ -59,8 +56,8 @@ app.use(requestDateTimeNow);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(corsMiddleware); // Apply Cross-Origin Resource Sharing (CORS)
 
-const auth = require("./controller/auth")(app);
-require("./controller/passport");
+const auth = require("./controllers/auth")(app);
+require("./controllers/passport");
 
 app.use(bodyParser.json());
 app.use(morgan("combined", { stream: accessLogStream }));
@@ -77,34 +74,7 @@ app.route("/documentation").get((req, res) => {
     res.sendFile("/public/documentation.html", { root: __dirname });
 });
 
-// Routes for Movies
-app.route("/movies").get(
-    // passport.authenticate("jwt", { session: false }),
-    getMovies
-);
 
-// Get a Movie by Title
-app.route("/movies/:title").get(
-    // passport.authenticate("jwt", { session: false }),
-    getMovieByTitle
-);
-
-// Get the genre of a movie by name
-app.route("/movies/genres/:name").get(
-    // passport.authenticate("jwt", { session: false }),
-    getGenreByName
-);
-
-// Get the info about a director by name
-app.route("/movies/directors/:name").get(
-    // passport.authenticate("jwt", { session: false }),
-    getDirectorByName
-);
-
-app.route("/movies/actors/:name").get(
-    // passport.authenticate("jwt", { session: false }),
-    getActorByName
-);
 
 // Routes for Users
 app.route("/users")
@@ -122,7 +92,7 @@ app.route("/users/:username")
             passport.authenticate("jwt", { session: false }),
             ...inputFieldCheckers,
         ],
-        updateUser
+        updateUser,
     )
     // Delete a user	-------------------------------------------
     .delete(passport.authenticate("jwt", { session: false }), deleteUser);
@@ -133,7 +103,7 @@ app.route("/users/:username/favorites/:movieID")
     // Delete from favorite movies --------------------------------
     .delete(
         passport.authenticate("jwt", { session: false }),
-        deleteMovieFromFavList
+        deleteMovieFromFavList,
     );
 
 // Error-handling middleware
@@ -147,7 +117,7 @@ app.use(
     "/swagger",
     swaggerUi.serve,
     // swaggerUi.setup(swaggerJsdocSpecs, { explorer: true })
-    swaggerUi.setup(swaggerJSON, { explorer: true })
+    swaggerUi.setup(swaggerJSON, { explorer: true }),
 );
 
 const PORT = process.env.PORT || 3000;

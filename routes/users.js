@@ -1,5 +1,5 @@
 const { validationResult } = require("express-validator"),
-    { User: Users } = require("../models/models");
+    { User: Users } = require("../models/users");
 
 const getUsers = (req, res) => {
     Users.find()
