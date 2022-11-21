@@ -17,18 +17,6 @@ const { requestDateTimeNow } = require("./utils/middleware"),
     { corsMiddleware } = require("./config/cors"),
     swaggerJSON = require("./public/swagger");
 
-// Import Routes
-const
-    {
-        getUsers,
-        createNewUser,
-        findUser,
-        updateUser,
-        deleteUser,
-        addMovieToFavList,
-        deleteMovieFromFavList,
-    } = require("./routes/users");
-
 // Set Input Validations
 const inputFieldCheckers = [
     check("username", "Username is required").isLength({ min: 5 }),
@@ -63,7 +51,10 @@ app.use(bodyParser.json());
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(methodOverride());
 
+// Set Routes
 app.use(express.static(path.join(__dirname, "public"))); // Public files
+app.use("/movies", require(path.join(__dirname, "routes", "movies.js")));
+app.use("/users", require(path.join(__dirname, "routes", "users.js")));
 
 // Public Routes
 app.route("/").get((req, res) => {
@@ -73,38 +64,6 @@ app.route("/").get((req, res) => {
 app.route("/documentation").get((req, res) => {
     res.sendFile("/public/documentation.html", { root: __dirname });
 });
-
-
-
-// Routes for Users
-app.route("/users")
-    // Get all users (just for the development phase)
-    .get(passport.authenticate("jwt", { session: false }), getUsers)
-    // Create a new user
-    .post(inputFieldCheckers, createNewUser);
-
-app.route("/users/:username")
-    // Find a user		-------------------------------------------
-    .get(passport.authenticate("jwt", { session: false }), findUser)
-    // Update a user	-------------------------------------------
-    .put(
-        [
-            passport.authenticate("jwt", { session: false }),
-            ...inputFieldCheckers,
-        ],
-        updateUser,
-    )
-    // Delete a user	-------------------------------------------
-    .delete(passport.authenticate("jwt", { session: false }), deleteUser);
-
-// Add a movie to the favorite movies -----------------------------
-app.route("/users/:username/favorites/:movieID")
-    .patch(passport.authenticate("jwt", { session: false }), addMovieToFavList)
-    // Delete from favorite movies --------------------------------
-    .delete(
-        passport.authenticate("jwt", { session: false }),
-        deleteMovieFromFavList,
-    );
 
 // Error-handling middleware
 app.use((err, req, res, next) => {
