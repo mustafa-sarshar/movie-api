@@ -3,7 +3,6 @@ require("dotenv").config();
 
 // Requirements
 const express = require("express"),
-    { check } = require("express-validator"),
     morgan = require("morgan"),
     fs = require("fs"),
     path = require("path"),
@@ -16,17 +15,6 @@ const express = require("express"),
 const { requestDateTimeNow } = require("./utils/middleware"),
     { corsMiddleware } = require("./config/cors"),
     swaggerJSON = require("./public/swagger");
-
-// Set Input Validations
-const inputFieldCheckers = [
-    check("username", "Username is required").isLength({ min: 5 }),
-    check(
-        "username",
-        "Username contains non alphanumeric characters - not allowed.",
-    ).isAlphanumeric(),
-    check("pass", "Password is required").not().isEmpty(),
-    check("email", "Email does not appear to be valid").isEmail(),
-];
 
 mongoose.connect(process.env.DATABASE_URI, {
     useNewUrlParser: true,
