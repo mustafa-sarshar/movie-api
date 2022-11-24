@@ -43,6 +43,9 @@ app.use(methodOverride());
 app.use(express.static(path.join(__dirname, "public"))); // Public files
 app.use("/movies", require(path.join(__dirname, "routes", "movies.js")));
 app.use("/users", require(path.join(__dirname, "routes", "users.js")));
+app.use("/directors", require(path.join(__dirname, "routes", "directors.js")));
+app.use("/actors", require(path.join(__dirname, "routes", "actors.js")));
+app.use("/genres", require(path.join(__dirname, "routes", "genres.js")));
 
 // Public Routes
 app.route("/").get((req, res) => {
@@ -63,7 +66,7 @@ app.use(
     "/swagger",
     swaggerUi.serve,
     // swaggerUi.setup(swaggerJsdocSpecs, { explorer: true })
-    swaggerUi.setup(swaggerJSON, { explorer: true }),
+    swaggerUi.setup(swaggerJSON, { explorer: true })
 );
 
 const PORT = process.env.PORT || 3000;

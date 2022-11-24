@@ -102,7 +102,80 @@
                 }
             }
         },
+        "/genres/{_id}": {
+            "get": {
+                "tags": ["Genres"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "_id",
+                        "required": true,
+                        "description": "Genre with id",
+                        "schema": {
+                            "$ref": "#/definitions/Genres/_id"
+                        }
+                    }
+                ],
+                "summary": "Get info about a specific genre",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Genres"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "examples": {
+                            "message": "No Genre Found with the name {name}"
+                        }
+                    }
+                }
+            }
+        },
         "/movies/directors/{name}": {
+            "get": {
+                "tags": ["Directors"],
+                "summary": "Get info about a specific director",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Directors"
+                        }
+                    }
+                }
+            }
+        },
+        "/directors/{_id}": {
+            "get": {
+                "tags": ["Directors"],
+                "summary": "Get info about a specific director",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Directors"
+                        }
+                    }
+                }
+            }
+        },
+        "/movies/actors/{name}": {
+            "get": {
+                "tags": ["Directors"],
+                "summary": "Get info about a specific director",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Directors"
+                        }
+                    }
+                }
+            }
+        },
+        "/actors/{_id}": {
             "get": {
                 "tags": ["Directors"],
                 "summary": "Get info about a specific director",

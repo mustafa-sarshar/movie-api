@@ -26,9 +26,9 @@
         <li>Return a list of ALL movies to the user</li>
         <li>Return data (description, genre, director, image URL, whether it is featured or not) about a single movie by
             title to the user</li>
-        <li>Return data about a genre (description) by name</li>
-        <li>Return data about a director (bio, birth date, death date) by name</li>
-        <li>Return data about an actor/actress (bio, birth date, death date) by name</li>
+        <li>Return data about a genre (description) by name/id</li>
+        <li>Return data about a director (bio, birth date, death date) by name/id</li>
+        <li>Return data about an actor/actress (bio, birth date, death date) by name/id</li>
         <li>Allow users to login</li>
         <li>Allow new users to register</li>
         <li>Allow users to update their user info</li>
@@ -111,6 +111,23 @@
                     </td>
                 </tr>
                 <tr>
+                    <!-- /genres/:_id | GET -->
+                    <td>Get information about a genre <br><em>(by "genre's id")</em></td>
+                    <td>/genres/:_id</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>
+                        A JSON object holding all data about the genre
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"_id": Genre's id,</span><br>
+                            <span class="text-style__tab-spacing">"name": Genre's name,</span><br>
+                            <span class="text-style__tab-spacing">"des": Genre's description</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
                     <!-- /movies/directors/:name | GET -->
                     <td>Get information about a director <br><em>(by "director's name")</em></td>
                     <td>/movies/directors/:name</td>
@@ -130,9 +147,47 @@
                     </td>
                 </tr>
                 <tr>
+                    <!-- /directors/:_id | GET -->
+                    <td>Get information about a director <br><em>(by "director's id")</em></td>
+                    <td>/directors/:_id</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>
+                        A JSON object holding all data about the director
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"_id": Director's id,</span><br>
+                            <span class="text-style__tab-spacing">"name": Director's name,</span><br>
+                            <span class="text-style__tab-spacing">"bio": Director's biography,</span><br>
+                            <span class="text-style__tab-spacing">"birth": Director's birth date,</span><br>
+                            <span class="text-style__tab-spacing">"death": Director's death date</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
                     <!-- /movies/actors/:name | GET -->
                     <td>Get information about an actor/actress <br><em>(by "actors's name")</em></td>
                     <td>/movies/actors/:name</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>
+                        A JSON object holding all data about the actor/actress
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"_id": Actors's id,</span><br>
+                            <span class="text-style__tab-spacing">"name": Actors's name,</span><br>
+                            <span class="text-style__tab-spacing">"bio": Actors's biography,</span><br>
+                            <span class="text-style__tab-spacing">"birth": Actors's birth date,</span><br>
+                            <span class="text-style__tab-spacing">"death": Actors's death date</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- /movies/actors/:name | GET -->
+                    <td>Get information about an actor/actress <br><em>(by "actors's id")</em></td>
+                    <td>/actors/:_id</td>
                     <td>GET</td>
                     <td>None</td>
                     <td>
