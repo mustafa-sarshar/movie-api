@@ -23,7 +23,9 @@ const createNewUser = (req, res) => {
     Users.findOne({ username: username })
       .then((user) => {
         if (user) {
-          return res.status(400).json({ message: username + "already exists" });
+          return res
+            .status(400)
+            .json({ message: username + " already exists" });
         } else {
           const newUser = {};
           newUser.username = username;
