@@ -8,7 +8,7 @@ const getUsers = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Error: " + err);
+      res.status(500).json({ message: "Error: " + err });
     });
 };
 
@@ -23,7 +23,7 @@ const createNewUser = (req, res) => {
     Users.findOne({ username: username })
       .then((user) => {
         if (user) {
-          return res.status(400).send(username + "already exists");
+          return res.status(400).json({ message: username + "already exists" });
         } else {
           const newUser = {};
           newUser.username = username;
@@ -38,13 +38,13 @@ const createNewUser = (req, res) => {
             })
             .catch((error) => {
               console.error(error);
-              res.status(500).send("Error: " + error);
+              res.status(500).json({ message: "Error: " + error });
             });
         }
       })
       .catch((error) => {
         console.error(error);
-        res.status(500).send("Error: " + error);
+        res.status(500).json({ message: "Error: " + error });
       });
   } else {
     res
@@ -61,7 +61,7 @@ const findUser = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Error: " + err);
+      res.status(500).json({ message: "Error: " + err });
     });
 };
 
@@ -69,7 +69,7 @@ const updateUser = async (req, res) => {
   // check the validation object for errors
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
+    return res.status(422).json({ message: errors.array() });
   }
   const { username } = req.params;
   const { username: uname, pass, email, birth } = req.body;
@@ -88,7 +88,7 @@ const updateUser = async (req, res) => {
       { new: true }, // This line makes sure that the updated document is returned
       (err, updatedUser) => {
         if (err) {
-          res.status(500).send("Error: " + err);
+          res.status(500).json({ message: "Error: " + err });
         } else {
           res.json(updatedUser);
         }
@@ -97,7 +97,7 @@ const updateUser = async (req, res) => {
   } else {
     res
       .status(400) // BAD REQUEST
-      .send("The new username is not available!!!");
+      .json({ message: "The new username is not available!!!" });
   }
 };
 
@@ -105,13 +105,11 @@ const deleteUser = (req, res) => {
   const { username } = req.params;
   Users.findOneAndRemove({ username: username }, (err, deletedUser) => {
     if (err) {
-      res.status(500).send("Error: " + err);
+      res.status(500).json({ message: "Error: " + err });
     } else {
-      res
-        .status(200)
-        .send(
-          `The user with username: ${username} deregistered from the database.`
-        );
+      res.status(200).json({
+        message: `The user with username: ${username} deregistered from the database.`,
+      });
     }
   });
 };
@@ -128,13 +126,11 @@ const addMovieToFavList = (req, res) => {
     { new: true }, // To make sure that the updated document is returned
     (err, updatedUser) => {
       if (err) {
-        res.status(500).send("Error: " + err);
+        res.status(500).json({ message: "Error: " + err });
       } else {
-        res
-          .status(200)
-          .send(
-            `The movie with ID: ${movieID} added to favorite list of movies of the user: ${username}`
-          );
+        res.status(200).json({
+          message: `The movie with ID: ${movieID} added to favorite list of movies of the user: ${username}`,
+        });
       }
     }
   );
@@ -152,13 +148,11 @@ const deleteMovieFromFavList = (req, res) => {
     { new: true }, // To make sure that the updated document is returned
     (err, updatedUser) => {
       if (err) {
-        res.status(500).send("Error: " + err);
+        res.status(500).json({ message: "Error: " + err });
       } else {
-        res
-          .status(200)
-          .send(
-            `The movie with ID: ${movieID} removed from favorite list of movies of the user: ${username}`
-          );
+        res.status(200).json({
+          message: `The movie with ID: ${movieID} removed from favorite list of movies of the user: ${username}`,
+        });
       }
     }
   );

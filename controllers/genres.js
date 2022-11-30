@@ -18,7 +18,9 @@ const getGenreByName = (req, res) => {
       if (genre) {
         res.status(200).json(genre);
       } else {
-        res.status(404).send(`No Genre Found with the name: ${name}`);
+        res
+          .status(404)
+          .json({ message: `No Genre Found with the name: ${name}` });
       }
     })
     .catch((err) => {
@@ -34,7 +36,7 @@ const getGenreByID = (req, res) => {
       if (genre) {
         res.status(200).json(genre);
       } else {
-        res.status(404).send(`No Genre Found with the ID: ${_id}`);
+        res.status(404).json({ message: `No Genre Found with the ID: ${_id}` });
       }
     })
     .catch((err) => {

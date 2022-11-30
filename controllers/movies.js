@@ -18,7 +18,9 @@ const getMovieByTitle = (req, res) => {
       if (movie) {
         res.status(200).json(movie);
       } else {
-        res.status(404).send(`No Movie Found with the title: ${title}`);
+        res
+          .status(404)
+          .json({ message: `No Movie Found with the title: ${title}` });
       }
     })
     .catch((err) => {

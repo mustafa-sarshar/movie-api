@@ -18,7 +18,9 @@ const getDirectorByName = (req, res) => {
       if (director) {
         res.status(200).json(director);
       } else {
-        res.status(404).send(`No Director Found with the name: ${name}`);
+        res
+          .status(404)
+          .json({ message: `No Director Found with the name: ${name}` });
       }
     })
     .catch((err) => {
@@ -34,7 +36,9 @@ const getDirectorByID = (req, res) => {
       if (director) {
         res.status(200).json(director);
       } else {
-        res.status(404).send(`No Director Found with the ID: ${_id}`);
+        res
+          .status(404)
+          .json({ message: `No Director Found with the ID: ${_id}` });
       }
     })
     .catch((err) => {
