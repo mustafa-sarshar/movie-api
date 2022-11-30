@@ -71,7 +71,7 @@ const updateUser = async (req, res) => {
   // check the validation object for errors
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({ message: errors.array() });
+    return res.status(422).json({ message: errors.array()[0].msg });
   }
   const { username } = req.params;
   const { username: uname, pass, email, birth } = req.body;
