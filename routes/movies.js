@@ -1,13 +1,23 @@
 const router = require("express").Router(),
-  { getMovies, getMovieByTitle } = require("../controllers/movies"),
+  {
+    getMovies,
+    getMoviesPopulated,
+    getMovieByTitle,
+  } = require("../controllers/movies"),
   { getGenreByName } = require("../controllers/genres"),
-  { getDirectorByName, getDirectorByID } = require("../controllers/directors"),
+  { getDirectorByName } = require("../controllers/directors"),
   { getActorByName } = require("../controllers/actors");
 
 // Routes for Movies
 router.route("/").get(
   // passport.authenticate("jwt", { session: false }),
   getMovies
+);
+
+// Routes for Movies (Populated)
+router.route("/populated").get(
+  // passport.authenticate("jwt", { session: false }),
+  getMoviesPopulated
 );
 
 // Get a Movie by Title

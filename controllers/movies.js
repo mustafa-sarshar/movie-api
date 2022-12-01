@@ -11,6 +11,21 @@ const getMovies = (req, res) => {
     });
 };
 
+const getMoviesPopulated = (req, res) => {
+  Movies.find()
+    .populate({
+      path: "directors genres stars",
+      select: "",
+    })
+    .then((movies) => {
+      res.status(200).json(movies);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ message: err.message });
+    });
+};
+
 const getMovieByTitle = (req, res) => {
   const { title } = req.params;
   Movies.findOne({ title: title })
@@ -29,4 +44,4 @@ const getMovieByTitle = (req, res) => {
     });
 };
 
-module.exports = { getMovies, getMovieByTitle };
+module.exports = { getMovies, getMoviesPopulated, getMovieByTitle };
