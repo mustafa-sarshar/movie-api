@@ -97,9 +97,7 @@ const updateUser = async (req, res) => {
       }
     );
   } else {
-    res
-      .status(400) // BAD REQUEST
-      .json({ message: "The new username is not available!!!" });
+    res.status(400).json({ message: "The new username is not available!!!" });
   }
 };
 
