@@ -1,6 +1,9 @@
 const router = require("express").Router(),
   passport = require("passport"),
-  { inputFieldCheckers } = require("../utils/validators"),
+  {
+    inputFieldCheckersForSignUp,
+    inputFieldCheckersForUpdate,
+  } = require("../utils/validators"),
   {
     getUsers,
     createNewUser,
@@ -17,7 +20,7 @@ router
   // Get all users (just for the development phase)
   .get(passport.authenticate("jwt", { session: false }), getUsers)
   // Create a new user
-  .post(inputFieldCheckers, createNewUser);
+  .post(inputFieldCheckersForSignUp, createNewUser);
 
 router
   .route("/:username")
@@ -25,7 +28,10 @@ router
   .get(passport.authenticate("jwt", { session: false }), findUser)
   // Update a user	-------------------------------------------
   .put(
-    [passport.authenticate("jwt", { session: false }), ...inputFieldCheckers],
+    [
+      passport.authenticate("jwt", { session: false }),
+      ...inputFieldCheckersForUpdate,
+    ],
     updateUser
   )
   // Delete a user	-------------------------------------------
