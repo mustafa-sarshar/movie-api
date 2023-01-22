@@ -3,3 +3,6 @@ data/
 legacy/
 logs/
 .env
+
+selfsigned.crt
+selfsigned.key

@@ -111,3 +111,7 @@
 127.0.0.1 - - [04/Dec/2022:18:55:17 +0000] "GET / HTTP/1.1" 304 - "http://localhost:8080/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
 127.0.0.1 - - [04/Dec/2022:18:58:07 +0000] "GET /movies/populated HTTP/1.1" 200 24657 "http://localhost:1234/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
 127.0.0.1 - - [04/Dec/2022:18:58:07 +0000] "GET /movies/populated HTTP/1.1" 304 - "http://localhost:1234/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
+127.0.0.1 - - [18/Jan/2023:15:06:29 +0000] "GET / HTTP/1.1" 200 717 "-" "Thunder Client (https://www.thunderclient.com)"
+127.0.0.1 - - [18/Jan/2023:15:06:43 +0000] "GET /movies/population HTTP/1.1" 404 55 "-" "Thunder Client (https://www.thunderclient.com)"
+127.0.0.1 - - [18/Jan/2023:15:06:46 +0000] "GET /movie/population HTTP/1.1" 404 155 "-" "Thunder Client (https://www.thunderclient.com)"
+127.0.0.1 - - [18/Jan/2023:15:07:11 +0000] "GET /movies/populated HTTP/1.1" 200 24657 "-" "Thunder Client (https://www.thunderclient.com)"

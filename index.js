@@ -3,13 +3,13 @@ require("dotenv").config();
 
 // Requirements
 const express = require("express"),
+  https = require("https"),
   morgan = require("morgan"),
   fs = require("fs"),
   path = require("path"),
   bodyParser = require("body-parser"),
   methodOverride = require("method-override"),
   mongoose = require("mongoose"),
-  passport = require("passport"),
   swaggerUi = require("swagger-ui-express");
 
 const { requestDateTimeNow } = require("./utils/middleware"),
@@ -72,11 +72,18 @@ app.use(
   swaggerUi.setup(swaggerJSON, { explorer: true })
 );
 
+// Set and run the server
 const PORT = process.env.PORT || 3000;
+// Source: https://stackoverflow.com/questions/11744975/enabling-https-on-express-js
+const serverCredentials = {
+  key: fs.readFileSync(path.join(__dirname, "selfsigned.key"), "utf-8"),
+  cert: fs.readFileSync(path.join(__dirname, "selfsigned.crt"), "utf-8"),
+};
 mongoose.connection.once("open", () => {
   console.log("Connected to Database");
+  const server = https.createServer(serverCredentials, app);
   // Start the server and listen to events on port ...
-  app.listen(PORT, "0.0.0.0", () => {
+  server.listen(PORT, "0.0.0.0", () => {
     console.log(`Server is running on port ${PORT}`);
   });
 });
