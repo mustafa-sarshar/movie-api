@@ -76,14 +76,16 @@ app.use(
 const PORT = process.env.PORT || 3000;
 // Source: https://stackoverflow.com/questions/11744975/enabling-https-on-express-js
 const serverCredentials = {
-  key: fs.readFileSync("./selfsigned.key", "utf-8"),
-  cert: fs.readFileSync("./selfsigned.crt", "utf-8"),
+  key: fs.readFileSync(path.join(__dirname, "selfsigned.key"), "utf-8"),
+  cert: fs.readFileSync(path.join(__dirname, "selfsigned.crt"), "utf-8"),
 };
+
 mongoose.connection.once("open", () => {
   console.log("Connected to Database");
-  // const server = https.createServer(serverCredentials, app);
+  const server = https.createServer(serverCredentials, app);
   // Start the server and listen to events on port ...
-  app.listen(PORT, "0.0.0.0", () => {
+  server.listen(PORT, "0.0.0.0", () => {
+    // app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server is running on port ${PORT}`);
   });
 });
