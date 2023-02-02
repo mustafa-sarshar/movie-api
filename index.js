@@ -84,7 +84,7 @@ mongoose.connection.once("open", () => {
   console.log("Connected to Database");
   const server = https.createServer(serverCredentials, app);
   // Start the server and listen to events on port ...
-  server.listen(PORT, "0.0.0.0", () => {
+  server.listen(PORT, () => {
     // app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server is running on port ${PORT}`);
   });
