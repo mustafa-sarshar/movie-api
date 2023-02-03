@@ -4,6 +4,7 @@ require("dotenv").config();
 // Requirements
 const express = require("express"),
   https = require("https"),
+  http = require("http"),
   morgan = require("morgan"),
   fs = require("fs"),
   path = require("path"),
@@ -73,7 +74,9 @@ app.use(
 );
 
 // Set and run the server
-const PORT = process.env.PORT || 3000;
+const PORT_HTTP = process.env.PORT_HTTP || 80;
+const PORT_HTTPS = process.env.PORT_HTTPS || 443;
+
 // Source: https://stackoverflow.com/questions/11744975/enabling-https-on-express-js
 const serverCredentials = {
   key: fs.readFileSync(path.join(__dirname, "selfsigned.key"), "utf-8"),
@@ -82,10 +85,14 @@ const serverCredentials = {
 
 mongoose.connection.once("open", () => {
   console.log("Connected to Database");
-  const server = https.createServer(serverCredentials, app);
+  const serverHttp = http.createServer(app);
+  const serverHttps = https.createServer(serverCredentials, app);
+
   // Start the server and listen to events on port ...
-  server.listen(PORT, () => {
-    // app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server is running on port ${PORT}`);
+  serverHttp.listen(PORT_HTTP, "0.0.0.0", () => {
+    console.log(`Server (HTTP) is running on port ${PORT_HTTP}`);
+  });
+  serverHttps.listen(PORT_HTTPS, "0.0.0.0", () => {
+    console.log(`Server (HTTPS) is running on port ${PORT_HTTPS}`);
   });
 });
