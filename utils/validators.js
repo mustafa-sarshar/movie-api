@@ -5,7 +5,7 @@ const inputFieldCheckersForSignUp = [
   check("username", "Username is required").not().isEmpty(),
   check(
     "username",
-    "Username length must be at least 5 characters is required"
+    "Username length must be at least 5 characters."
   ).isLength({ min: 5 }),
   check(
     "username",
@@ -14,7 +14,7 @@ const inputFieldCheckersForSignUp = [
   check("pass", "Password is required").not().isEmpty(),
   check(
     "pass",
-    "Password length must be at least 5 characters is required"
+    "Password length must be at least 5 characters."
   ).isLength({ min: 5 }),
   check("email", "Email is required").not().isEmpty(),
   check("email", "Email does not appear to be valid").isEmail(),
@@ -23,7 +23,7 @@ const inputFieldCheckersForSignUp = [
 
 // Set Input Validations
 const inputFieldCheckersForUpdate = [
-  check("username", "Username length must be at least 5 characters is required")
+  check("username", "Username length must be at least 5 characters.")
     .isLength({ min: 5 })
     .optional(),
   check(
@@ -32,7 +32,7 @@ const inputFieldCheckersForUpdate = [
   )
     .isAlphanumeric()
     .optional(),
-  check("pass", "Password length must be at least 5 characters is required")
+  check("pass", "Password length must be at least 5 characters.")
     .isLength({ min: 5 })
     .optional(),
   check("email", "Email does not appear to be valid").isEmail().optional(),
