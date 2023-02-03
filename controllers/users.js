@@ -78,8 +78,12 @@ const updateUser = async (req, res) => {
   const { username: uname, email, birth } = req.body;
   let { pass } = req.body;
   const duplicationCheck = await Users.find({ username: uname }).exec();
+  console.log("duplicationCheck", duplicationCheck);
 
-  if (duplicationCheck.length === 0) {
+  if (
+    duplicationCheck.length === 0 ||
+    (duplicationCheck.length > 0 && duplicationCheck[0]?.username === username)
+  ) {
     if (pass) pass = await Users.hashPassword(pass);
 
     Users.findOneAndUpdate(
