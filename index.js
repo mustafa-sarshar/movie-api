@@ -74,6 +74,7 @@ app.use(
 );
 
 // Set and run the server
+const PORT_DEFAULT = 8080;
 const PORT_HTTP = process.env.PORT_HTTP || 80;
 const PORT_HTTPS = process.env.PORT_HTTPS || 443;
 
@@ -85,17 +86,17 @@ const PORT_HTTPS = process.env.PORT_HTTPS || 443;
 
 mongoose.connection.once("open", () => {
   console.log("Connected to Database");
-  const serverHttp = http.createServer(app);
+  // const serverHttp = http.createServer(app);
   // const serverHttps = https.createServer(serverCredentials, app);
 
   // Start the server and listen to events on port ...
-  serverHttp.listen(PORT_HTTP, "0.0.0.0", () => {
-    console.log(`Server (HTTP) is running on port ${PORT_HTTP}`);
-  });
+  // serverHttp.listen(PORT_HTTP, "0.0.0.0", () => {
+  //   console.log(`Server (HTTP) is running on port ${PORT_HTTP}`);
+  // });
   // serverHttps.listen(PORT_HTTPS, "0.0.0.0", () => {
   //   console.log(`Server (HTTPS) is running on port ${PORT_HTTPS}`);
   // });
-  // app.listen(PORT_HTTPS, "0.0.0.0", () => {
-  //   console.log(`Server is running on port ${PORT_HTTPS}`);
-  // });
+  app.listen(PORT_DEFAULT, () => {
+    console.log(`Server is running on port ${PORT_DEFAULT}`);
+  });
 });
