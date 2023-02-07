@@ -77,22 +77,25 @@ app.use(
 const PORT_HTTP = process.env.PORT_HTTP || 80;
 const PORT_HTTPS = process.env.PORT_HTTPS || 443;
 
-// Source: https://stackoverflow.com/questions/11744975/enabling-https-on-express-js
-const serverCredentials = {
-  key: fs.readFileSync(path.join(__dirname, "selfsigned.key"), "utf-8"),
-  cert: fs.readFileSync(path.join(__dirname, "selfsigned.crt"), "utf-8"),
-};
+// // Source: https://stackoverflow.com/questions/11744975/enabling-https-on-express-js
+// const serverCredentials = {
+//   key: fs.readFileSync(path.join(__dirname, "selfsigned.key"), "utf-8"),
+//   cert: fs.readFileSync(path.join(__dirname, "selfsigned.crt"), "utf-8"),
+// };
 
 mongoose.connection.once("open", () => {
   console.log("Connected to Database");
-  const serverHttp = http.createServer(app);
-  const serverHttps = https.createServer(serverCredentials, app);
+  // const serverHttp = http.createServer(app);
+  // const serverHttps = https.createServer(serverCredentials, app);
 
   // Start the server and listen to events on port ...
-  serverHttp.listen(PORT_HTTP, "0.0.0.0", () => {
-    console.log(`Server (HTTP) is running on port ${PORT_HTTP}`);
-  });
-  serverHttps.listen(PORT_HTTPS, "0.0.0.0", () => {
-    console.log(`Server (HTTPS) is running on port ${PORT_HTTPS}`);
+  // serverHttp.listen(PORT_HTTP, "0.0.0.0", () => {
+  //   console.log(`Server (HTTP) is running on port ${PORT_HTTP}`);
+  // });
+  // serverHttps.listen(PORT_HTTPS, "0.0.0.0", () => {
+  //   console.log(`Server (HTTPS) is running on port ${PORT_HTTPS}`);
+  // });
+  app.listen(PORT_HTTPS, "0.0.0.0", () => {
+    console.log(`Server is running on port ${PORT_HTTPS}`);
   });
 });
