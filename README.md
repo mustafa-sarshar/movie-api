@@ -6,14 +6,17 @@
 - This web application will provide users with access to information about different movies, directors, actors, and genres.
 - Users will be able to sign up, update their personal information, and create a list of their favorite movies.
 
+## LIVE DEMO
+- [Musto MovieApi](https://musto-movie-api-vf0k.onrender.com/)
+
 ## THE 5 Ws
 
-- Who — The immediate users will be frontend developers who’ll work on the client-side for the application based on what’s been documented on the server-side (in this case, this developer is also me!). I should also consider the users of the [Musto Flix]() application. These will be movie enthusiasts who enjoy reading information about different movies.
+- Who — The immediate users will be frontend developers who’ll work on the client-side for the application based on what’s been documented on the server-side (in this case, this developer is also me!). I should also consider the users of the [Musto Flix (React)](https://mustafa-sarshar.github.io/musto-flix-react/) | [Musto Flix (Angular)](https://mustafa-sarshar.github.io/musto-flix-angular) application. These will be movie enthusiasts who enjoy reading information about different movies.
 - What — The complete server-side of the web application, including the server, business logic, and business layers of the application. It will consist of a well-designed REST API and architected database built using JavaScript, Node.js, Express, and MongoDB. The REST API will be accessed via commonly used HTTP methods like GET and POST. Similar methods (CRUD) will be used to retrieve data from your database and store that data in a non-relational way.
-- When — Whenever users of [Musto Flix]() are interacting with the application, the server-side of the application will be in use, processing their requests and performing operations against the data in the database. These users will be able to use the [Musto Flix]() application whenever they like to read information about different movies or update their user information, for instance, their list of “Favorite Movies.”
-- Where — The application will be hosted online. The [Musto Flix]() application itself is responsive and
+- When — Whenever users of [Musto Flix (React)](https://mustafa-sarshar.github.io/musto-flix-react/) | [Musto Flix (Angular)](https://mustafa-sarshar.github.io/musto-flix-angular)  are interacting with the application, the server-side of the application will be in use, processing their requests and performing operations against the data in the database. These users will be able to use the [Musto Flix (React)](https://mustafa-sarshar.github.io/musto-flix-react/) | [Musto Flix (Angular)](https://mustafa-sarshar.github.io/musto-flix-angular)  application whenever they like to read information about different movies or update their user information, for instance, their list of “Favorite Movies.”
+- Where — The application will be hosted online. The [Musto Flix (React)](https://mustafa-sarshar.github.io/musto-flix-react/) | [Musto Flix (Angular)](https://mustafa-sarshar.github.io/musto-flix-angular)  application itself is responsive and
   can therefore be used anywhere and on any device, giving all users the same experience.
-- Why — Movie enthusiasts want to be able to access information about different movies, directors, actors, and genres. The server-side of the [Musto Flix]() application will ensure they have access to this information, that their requests can be processed, and that all necessary data can be stored.
+- Why — Movie enthusiasts want to be able to access information about different movies, directors, actors, and genres. The server-side of the [Musto Flix (React)](https://mustafa-sarshar.github.io/musto-flix-react/) | [Musto Flix (Angular)](https://mustafa-sarshar.github.io/musto-flix-angular)  application will ensure they have access to this information, that their requests can be processed, and that all necessary data can be stored.
 
 ## USER STORIES
 
