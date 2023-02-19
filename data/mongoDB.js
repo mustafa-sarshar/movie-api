@@ -14,7 +14,7 @@ db.movies.find({
 });
 
 // Update the description of the Movie: 'Spider-Man'
-db.movies.update(
+db.movies.updateOne(
   { title: "Spider-Man" },
   {
     $set: {
@@ -23,7 +23,7 @@ db.movies.update(
   }
 );
 
-db.movies.update(
+db.movies.updateOne(
   { title: "Titanic" },
   {
     $set: {
@@ -31,6 +31,97 @@ db.movies.update(
         db.actors.findOne({ name: "JLeonardo DiCaprio" })._id,
         db.actors.findOne({ name: "Billy Zane" })._id,
         db.actors.findOne({ name: "Kate Winslet" })._id,
+      ],
+    },
+  }
+);
+
+db.movies.updateOne(
+  { title: "Spider-Man" },
+  {
+    $set: {
+      stars: [
+        db.actors.findOne({ name: "Tobey Maguire" })._id,
+        db.actors.findOne({ name: "Kirsten Dunst" })._id,
+        db.actors.findOne({ name: "Willem Dafoe" })._id,
+      ],
+    },
+  }
+);
+
+db.movies.updateOne(
+  { title: "Batman Forever" },
+  {
+    $set: {
+      stars: [
+        db.actors.findOne({ name: "Val Kilmer" })._id,
+        db.actors.findOne({ name: "Tommy Lee Jones" })._id,
+        db.actors.findOne({ name: "Jim Carrey" })._id,
+      ],
+    },
+  }
+);
+
+db.movies.updateOne(
+  { title: "Batman & Robin" },
+  {
+    $set: {
+      stars: [
+        db.actors.findOne({ name: "Arnold Schwarzenegger" })._id,
+        db.actors.findOne({ name: "George Clooney" })._id,
+        db.actors.findOne({ name: "Chris O'Donnell" })._id,
+      ],
+    },
+  }
+);
+
+db.movies.updateOne(
+  { title: "The Number 23" },
+  {
+    $set: {
+      stars: [
+        db.actors.findOne({ name: "Jim Carrey" })._id,
+        db.actors.findOne({ name: "Virginia Madsen" })._id,
+        db.actors.findOne({ name: "Logan Lerman" })._id,
+      ],
+    },
+  }
+);
+
+// db.movies.updateOne(
+//   { title: "Cousins" },
+//   {
+//     $set: {
+//       stars: [
+//         db.actors.findOne({ name: "Rachel House" })._id,
+//         db.actors.findOne({ name: "Chelsie Florence" })._id,
+//         db.actors.findOne({ name: "Cohen Holloway" })._id,
+//       ],
+//     },
+//   }
+// );
+
+db.movies.updateOne(
+  { title: "Avatar" },
+  {
+    $set: {
+      stars: [
+        db.actors.findOne({ name: "Sam Worthington" })._id,
+        db.actors.findOne({ name: "Zoe Saldana" })._id,
+        db.actors.findOne({ name: "Sigourney Weaver" })._id,
+      ],
+    },
+  }
+);
+
+db.movies.updateOne(
+  { title: "The Godfather" },
+  {
+    $set: {
+      stars: [
+        db.actors.findOne({ name: "Marlon Brando" })._id,
+        db.actors.findOne({ name: "Al Pacino" })._id,
+        db.actors.findOne({ name: "James Caan" })._id,
       ],
     },
   }
