@@ -1,9 +1,11 @@
 const cors = require("cors");
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS.split(";");
-
 const corsMiddleware = cors({
   origin: (origin, callback) => {
+    let allowedOrigins = ["*"];
+    if (process.env.ALLOWED_ORIGINS) {
+      allowedOrigins = process.env.ALLOWED_ORIGINS.split(";");
+    }
     // console.log("AllowedOrigins:", allowedOrigins);
 
     if (!origin || allowedOrigins.indexOf("*") > -1) {
