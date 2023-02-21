@@ -1,6 +1,6 @@
 {
   "source": {
-    "include": ["src"],
+    "include": ["./"],
     "includePattern": ".js$",
     "excludePattern": "(node_modules/|docs)"
   },
@@ -11,7 +11,7 @@
   },
   "opts": {
     "recurse": true,
-    "destination": "./docs/",
+    "destination": "./public/docs/",
     "tutorials": "./public/tutorials",
     "readme": "./README.md"
   }
