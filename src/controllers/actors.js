@@ -1,5 +1,16 @@
 const { Actor: Actors } = require("../models/actors");
 
+/**
+ * @module Controllers
+ * @description This modules includes all methods related to actors.
+ */
+
+/**
+ * @description finds all the actors in the database and sets the response with data of the actors in json format.
+ * @param {HttpRequest} req - request object
+ * @param {HttpResponse} res - response object
+ * @returns {void}
+ */
 const getActors = (req, res) => {
   Actors.find()
     .then((actors) => {

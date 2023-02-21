@@ -1,4 +1,15 @@
-// setup the logger
+// ts-check
+
+/**
+ * @module Utils
+ */
+/**
+ * @description This Middleware sets the value of the 'requestDateTime' parameter of the request object the current DataTime in an appropriate format.
+ * @param {HttpRequest} req
+ * @param {HttpResponse} res
+ * @param {Callback} next
+ * @returns {void}
+ */
 const requestDateTimeNow = (req, res, next) => {
   const dateIns = new Date();
   const dateNow =

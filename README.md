@@ -1,4 +1,4 @@
-# movie-api
+# MovieApi
 
 ## OBJECTIVES
 

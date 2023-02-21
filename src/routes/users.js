@@ -14,7 +14,6 @@ const router = require("express").Router(),
     deleteMovieFromFavList,
   } = require("../controllers/users");
 
-// Routes for Users
 router
   .route("/")
   // Get all users (just for the development phase)

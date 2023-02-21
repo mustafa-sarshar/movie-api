@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Tutorial: MovieApi Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Tutorial: MovieApi Documentation</h1>
+
+    <section>
+
+<header>
+    
+
+    <h2>MovieApi Documentation</h2>
+</header>
+
+<article>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/styles.css"> <!-- Just for the development phase -->
+    <title>Documentation</title>
+</head>
+<body>
+    <header>
+        <h1>Documentation</h1>
+        <hr>
+    </header>
+    <h2>Movie-API</h2>
+    <P>
+        This web-app provides the users with information and details about different movies. Moreover, users can
+        personalize their movie list and create a list of their favorite movies, if they have already signed up
+        themselves and established a user account.
+    </P>
+    <h3>Features</h3>
+    <p>
+        This web-app can:
+    <ul>
+        <li>Return a list of ALL movies to the user</li>
+        <li>Return data (description, genre, director, image URL, whether it is featured or not) about a single movie by
+            title to the user</li>
+        <li>Return data about a genre (description) by name/id</li>
+        <li>Return data about a director (bio, birth date, death date) by name/id</li>
+        <li>Return data about an actor/actress (bio, birth date, death date) by name/id</li>
+        <li>Allow users to login</li>
+        <li>Allow new users to register</li>
+        <li>Allow users to update their user info</li>
+        <li>Allow existing users to deregister.</li>
+        <li>Allow users to add a movie to their list of favorites</li>
+        <li>Allow users to remove a movie from their list of favorites</li>
+    </ul>
+
+    </p>
+    <h3>RESTful API</h3>
+    <div class="my-table__container">
+
+        <table class="my-table">
+            <caption>Useful information about the URL endpoints and request methods.</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Request</th>
+                    <th scope="col">URL</th>
+                    <th scope="col">HTTP Method</th>
+                    <th scope="col">Request body data format</th>
+                    <th scope="col">Response body data format</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!-- /movies | GET -->
+                    <td>Get a list of all movies</td>
+                    <td>/movies</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>A JSON object holding data about all movies</td>
+                </tr>
+                <tr>
+                    <!-- /movies/:title | GET -->
+                    <td>Get information about a specific movie <br><em>(by "movie's title")</em></td>
+                    <td>/movies/:title</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>
+                        A JSON object holding data about the movie
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"_id": Movie's id,</span><br>
+                            <span class="text-style__tab-spacing">"title": Movie's title,</span><br>
+                            <span class="text-style__tab-spacing">"des": Movie's description of the Movie,</span><br>
+                            <span class="text-style__tab-spacing">"director_id": Director's id,</span><br>
+                            <span class="text-style__tab-spacing">"genre_id": Genre's id,</span><br>
+                            <span class="text-style__tab-spacing">"actors": [</span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">Actor's id,</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">Actor's id,</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">Actor's id</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">],</span><br>
+                            <span class="text-style__tab-spacing">"image_url": Image's URL,</span><br>
+                            <span class="text-style__tab-spacing">"featured": true/false</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- /movies/genres/:name | GET -->
+                    <td>Get information about a genre <br><em>(by "genre's name")</em></td>
+                    <td>/movies/genres/:name</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>
+                        A JSON object holding all data about the genre
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"_id": Genre's id,</span><br>
+                            <span class="text-style__tab-spacing">"name": Genre's name,</span><br>
+                            <span class="text-style__tab-spacing">"des": Genre's description</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- /genres/:_id | GET -->
+                    <td>Get information about a genre <br><em>(by "genre's id")</em></td>
+                    <td>/genres/:_id</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>
+                        A JSON object holding all data about the genre
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"_id": Genre's id,</span><br>
+                            <span class="text-style__tab-spacing">"name": Genre's name,</span><br>
+                            <span class="text-style__tab-spacing">"des": Genre's description</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- /movies/directors/:name | GET -->
+                    <td>Get information about a director <br><em>(by "director's name")</em></td>
+                    <td>/movies/directors/:name</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>
+                        A JSON object holding all data about the director
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"_id": Director's id,</span><br>
+                            <span class="text-style__tab-spacing">"name": Director's name,</span><br>
+                            <span class="text-style__tab-spacing">"bio": Director's biography,</span><br>
+                            <span class="text-style__tab-spacing">"birth": Director's birth date,</span><br>
+                            <span class="text-style__tab-spacing">"death": Director's death date</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- /directors/:_id | GET -->
+                    <td>Get information about a director <br><em>(by "director's id")</em></td>
+                    <td>/directors/:_id</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>
+                        A JSON object holding all data about the director
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"_id": Director's id,</span><br>
+                            <span class="text-style__tab-spacing">"name": Director's name,</span><br>
+                            <span class="text-style__tab-spacing">"bio": Director's biography,</span><br>
+                            <span class="text-style__tab-spacing">"birth": Director's birth date,</span><br>
+                            <span class="text-style__tab-spacing">"death": Director's death date</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- /movies/actors/:name | GET -->
+                    <td>Get information about an actor/actress <br><em>(by "actors's name")</em></td>
+                    <td>/movies/actors/:name</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>
+                        A JSON object holding all data about the actor/actress
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"_id": Actors's id,</span><br>
+                            <span class="text-style__tab-spacing">"name": Actors's name,</span><br>
+                            <span class="text-style__tab-spacing">"bio": Actors's biography,</span><br>
+                            <span class="text-style__tab-spacing">"birth": Actors's birth date,</span><br>
+                            <span class="text-style__tab-spacing">"death": Actors's death date</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- /movies/actors/:name | GET -->
+                    <td>Get information about an actor/actress <br><em>(by "actors's id")</em></td>
+                    <td>/actors/:_id</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>
+                        A JSON object holding all data about the actor/actress
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"_id": Actors's id,</span><br>
+                            <span class="text-style__tab-spacing">"name": Actors's name,</span><br>
+                            <span class="text-style__tab-spacing">"bio": Actors's biography,</span><br>
+                            <span class="text-style__tab-spacing">"birth": Actors's birth date,</span><br>
+                            <span class="text-style__tab-spacing">"death": Actors's death date</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- /login | POST -->
+                    <td>
+                        Login in to the website <br><em>(by "user's username and password")</em><br><br>
+                        The local authentication strategy: <br>
+                        requests will be authenticated based on the credentials submitted through an HTML-based login
+                        form.
+                    </td>
+                    <td>
+                        /login?username=&lt;username&gt;&pass=&lt;pass&gt; <br><br><br><br>
+                        Set the query parameters as follows: <br>
+                        <span class="text-style__tab-spacing">username = user's username</span><br>
+                        <span class="text-style__tab-spacing">pass = user's password</span><br>
+                    </td>
+                    <td>POST</td>
+                    <td>None</td>
+                    <td>
+                        A JSON object holding data about all the user and the authentication token
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"user": {</span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">"_id": User's id,</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">"username": User's username,</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">"pass": User's password,</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">"email": User's email,</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">"birth": User's birth date (yyyy-mm-dd),</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">"favList": [</span><br>
+                                <span class="text-style__tab-spacing">
+                                    <span class="text-style__tab-spacing">
+                                        <span class="text-style__tab-spacing">User's favorite movie 1,</span>
+                                    </span>
+                                </span><br>
+                                <span class="text-style__tab-spacing">
+                                    <span class="text-style__tab-spacing">
+                                        <span class="text-style__tab-spacing">User's favorite movie 2,</span>
+                                    </span>
+                                </span><br>
+                                <span class="text-style__tab-spacing">
+                                    <span class="text-style__tab-spacing">
+                                        <span class="text-style__tab-spacing">User's favorite movie 3,</span>
+                                    </span>
+                                </span><br>
+                                <span class="text-style__tab-spacing">
+                                    <span class="text-style__tab-spacing">],</span>
+                                </span><br>
+                                <span class="text-style__tab-spacing">
+                                    <span class="text-style__tab-spacing">"_v": Version's number,</span>
+                                </span><br>
+                                <span class="text-style__tab-spacing">},</span><br>
+                                <span class="text-style__tab-spacing">"token": User's JSON Web Token</span><br>
+                            </span>
+                            } <br>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- /users | GET -->
+                    <td>Get a list of all users</td>
+                    <td>/users</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>A JSON object holding data about all users</td>
+                </tr>
+                <tr>
+                    <!-- /users | POST -->
+                    <td>Register a new user</td>
+                    <td>/users</td>
+                    <td>POST</td>
+                    <td>
+                        A JSON object holding data about user's name
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"username": User's username (required),</span><br>
+                            <span class="text-style__tab-spacing">"pass": User's password (required),</span><br>
+                            <span class="text-style__tab-spacing">"email": User's email (required),</span><br>
+                            <span class="text-style__tab-spacing">"birth": User's birth date (yyyy-mm-dd)
+                                (optional)</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                    <td>
+                        A JSON object holding data about the new user
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"_id": User's id,</span><br>
+                            <span class="text-style__tab-spacing">"username": User's username,</span><br>
+                            <span class="text-style__tab-spacing">"pass": User's password,</span><br>
+                            <span class="text-style__tab-spacing">"email": User's email,</span><br>
+                            <span class="text-style__tab-spacing">"birth": User's birth date,</span><br>
+                            <span class="text-style__tab-spacing">"favList": [</span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">User's favorite movie 1,</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">User's favorite movie 2,</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">User's favorite movie 3</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">]</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- /users/:username | GET -->
+                    <td>Get a user's info <br><em>(by "user's username")</em></td>
+                    <td>/users/:username</td>
+                    <td>GET</td>
+                    <td>
+                        None
+                    </td>
+                    <td>
+                        A JSON object holding data about the user
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"_id": User's id,</span><br>
+                            <span class="text-style__tab-spacing">"username": User's username,</span><br>
+                            <span class="text-style__tab-spacing">"pass": User's password,</span><br>
+                            <span class="text-style__tab-spacing">"email": User's email,</span><br>
+                            <span class="text-style__tab-spacing">"birth": User's birth date,</span><br>
+                            <span class="text-style__tab-spacing">"favList": [</span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">User's favorite movie 1,</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">User's favorite movie 2,</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">User's favorite movie 3</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">]</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- /users/:username | PUT -->
+                    <td>Update user info <br><em>(by "user's username")</em></td>
+                    <td>/users/:username</td>
+                    <td>PUT</td>
+                    <td>
+                        A JSON object holding new data about the user
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"username": user's new username (required),</span><br>
+                            <span class="text-style__tab-spacing">"pass": user's new password (required),</span><br>
+                            <span class="text-style__tab-spacing">"email": user's new email (required),</span><br>
+                            <span class="text-style__tab-spacing">"birth": user's new birth date (yyyy-mm-dd)
+                                (optional)</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                    <td>
+                        A JSON object holding data about the updated user
+                        <p class="text-style__code-paragraph">
+                            { <br>
+                            <span class="text-style__tab-spacing">"_id": User's id,</span><br>
+                            <span class="text-style__tab-spacing">"username": User's username,</span><br>
+                            <span class="text-style__tab-spacing">"pass": User's password,</span><br>
+                            <span class="text-style__tab-spacing">"email": User's email,</span><br>
+                            <span class="text-style__tab-spacing">"birth": User's birth date,</span><br>
+                            <span class="text-style__tab-spacing">"favList": [</span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">User's favorite movie 1,</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">User's favorite movie 2,</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">
+                                <span class="text-style__tab-spacing">User's favorite movie 3</span>
+                            </span><br>
+                            <span class="text-style__tab-spacing">]</span><br>
+                            } <br>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <!-- /users/:username | DELETE -->
+                    <td>Deregister a user <br><em>(by "user's username")</em></td>
+                    <td>/users/:username</td>
+                    <td>DELETE</td>
+                    <td>None</td>
+                    <td>A message including the info about the deregistered user's username</td>
+                </tr>
+                <tr>
+                    <!-- /users/:username/favorites/:movieID | PATCH -->
+                    <td>Add a movie to user's list of favorites <br><em>(by "movie's id")</em></td>
+                    <td>/users/:username/favorites/:movieID</td>
+                    <td>PATCH</td>
+                    <td>None</td>
+                    <td>A message including the info about the added movie' id to the list of favorites</td>
+                </tr>
+                <tr>
+                    <!-- /users/:username/favorites/:movieID | DELETE -->
+                    <td>Remove a movie from user's list of favorites <br><em>(by "movie's id")</em></td>
+                    <td>/users/:username/favorites/:movieID</td>
+                    <td>DELETE</td>
+                    <td>None</td>
+                    <td>A message including the info about the removed movie's id from the list of favorites</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        Table shows various requests you might make to the app for organizing users data and
+                        their corresponding URL endpoints; the HTTP methods used to make the requests; and the
+                        body data format your API might expect for each request and response.
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>
+</article>
+
+</section>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Controllers.html">Controllers</a></li><li><a href="module-Utils.html">Utils</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-documentation.html">MovieApi Documentation</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Feb 21 2023 12:10:06 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
