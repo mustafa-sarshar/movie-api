@@ -2,10 +2,10 @@
   "name": "movie-api",
   "version": "2.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node ./src/index.js",
-    "dev": "nodemon ./src/index.js",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "jsdoc": "jsdoc -c jsdoc.json"
   },
   "repository": {
