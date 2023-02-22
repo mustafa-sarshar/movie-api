@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/actors.js</title>
+    <title>JSDoc: Source: controllers/genres.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: controllers/actors.js</h1>
+    <h1 class="page-title">Source: controllers/genres.js</h1>
 
     
 
@@ -27,22 +27,22 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @module actors
- * @description This modules includes all methods related to actors.
+ * @module genres
+ * @description This modules includes all methods related to genres.
  */
 
-const { Actor: Actors } = require("../models/actors");
+const { Genre: Genres } = require("../models/genres");
 
 /**
- * @description finds all the actors in the database and sets the response with data of the actors in json format.
+ * @description finds all the genres in the database and sets the response with data of the genres in json format.
  * @param {HttpRequest} req - request object
  * @param {HttpResponse} res - response object
  * @returns {void}
  */
-const getActors = (req, res) => {
-  Actors.find()
-    .then((actors) => {
-      res.status(200).json(actors);
+const getGenres = (req, res) => {
+  Genres.find()
+    .then((genres) => {
+      res.status(200).json(genres);
     })
     .catch((err) => {
       console.error(err);
@@ -51,21 +51,21 @@ const getActors = (req, res) => {
 };
 
 /**
- * @description finds the first actor in the database that matches the given actor name and sets the response with data of the actors in json format.
+ * @description finds the first genre in the database that matches the given genre name and sets the response with data of the genres in json format.
  * @param {HttpRequest} req - request object
  * @param {HttpResponse} res - response object
  * @returns {void}
  */
-const getActorByName = (req, res) => {
+const getGenreByName = (req, res) => {
   const { name } = req.params;
-  Actors.findOne({ name: name })
-    .then((actor) => {
-      if (actor) {
-        res.status(200).json(actor);
+  Genres.findOne({ name: name })
+    .then((genre) => {
+      if (genre) {
+        res.status(200).json(genre);
       } else {
         res
           .status(404)
-          .json({ message: `No Director Found with the name: ${name}` });
+          .json({ message: `No Genre Found with the name: ${name}` });
       }
     })
     .catch((err) => {
@@ -75,19 +75,19 @@ const getActorByName = (req, res) => {
 };
 
 /**
- * @description finds the first actor in the database that matches the given actor ID and sets the response with data of the actors in json format.
+ * @description finds the first genre in the database that matches the given genre ID and sets the response with data of the genres in json format.
  * @param {HttpRequest} req - request object
  * @param {HttpResponse} res - response object
  * @returns {void}
  */
-const getActorByID = (req, res) => {
+const getGenreByID = (req, res) => {
   const { _id } = req.params;
-  Actors.findById(_id)
-    .then((actor) => {
-      if (actor) {
-        res.status(200).json(actor);
+  Genres.findById(_id)
+    .then((genre) => {
+      if (genre) {
+        res.status(200).json(genre);
       } else {
-        res.status(404).json({ message: `No Actor Found with the ID: ${_id}` });
+        res.status(404).json({ message: `No Genre Found with the ID: ${_id}` });
       }
     })
     .catch((err) => {
@@ -96,7 +96,7 @@ const getActorByID = (req, res) => {
     });
 };
 
-module.exports = { getActors, getActorByName, getActorByID };
+module.exports = { getGenres, getGenreByName, getGenreByID };
 </code></pre>
         </article>
     </section>
