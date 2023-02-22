@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/actors.js</title>
+    <title>JSDoc: Source: controllers/directors.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: controllers/actors.js</h1>
+    <h1 class="page-title">Source: controllers/directors.js</h1>
 
     
 
@@ -27,22 +27,22 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @module actors
- * @description This modules includes all methods related to actors.
+ * @module directors
+ * @description This modules includes all methods related to directors.
  */
 
-const { Actor: Actors } = require("../models/actors");
+const { Director: Directors } = require("../models/directors");
 
 /**
- * @description finds all the actors in the database and sets the response with data of the actors in json format.
+ * @description finds all the directors in the database and sets the response with data of the directors in json format.
  * @param {HttpRequest} req - request object
  * @param {HttpResponse} res - response object
  * @returns {void}
  */
-const getActors = (req, res) => {
-  Actors.find()
-    .then((actors) => {
-      res.status(200).json(actors);
+const getDirectors = (req, res) => {
+  Directors.find()
+    .then((directors) => {
+      res.status(200).json(directors);
     })
     .catch((err) => {
       console.error(err);
@@ -51,17 +51,17 @@ const getActors = (req, res) => {
 };
 
 /**
- * @description finds the first actor in the database that matches the given actor name and sets the response with data of the actors in json format.
+ * @description finds the first director in the database that matches the given director name and sets the response with data of the directors in json format.
  * @param {HttpRequest} req - request object
  * @param {HttpResponse} res - response object
  * @returns {void}
  */
-const getActorByName = (req, res) => {
+const getDirectorByName = (req, res) => {
   const { name } = req.params;
-  Actors.findOne({ name: name })
-    .then((actor) => {
-      if (actor) {
-        res.status(200).json(actor);
+  Directors.findOne({ name: name })
+    .then((director) => {
+      if (director) {
+        res.status(200).json(director);
       } else {
         res
           .status(404)
@@ -75,19 +75,21 @@ const getActorByName = (req, res) => {
 };
 
 /**
- * @description finds the first actor in the database that matches the given actor ID and sets the response with data of the actors in json format.
+ * @description finds the first director in the database that matches the given director ID and sets the response with data of the directors in json format.
  * @param {HttpRequest} req - request object
  * @param {HttpResponse} res - response object
  * @returns {void}
  */
-const getActorByID = (req, res) => {
+const getDirectorByID = (req, res) => {
   const { _id } = req.params;
-  Actors.findById(_id)
-    .then((actor) => {
-      if (actor) {
-        res.status(200).json(actor);
+  Directors.findById(_id)
+    .then((director) => {
+      if (director) {
+        res.status(200).json(director);
       } else {
-        res.status(404).json({ message: `No Actor Found with the ID: ${_id}` });
+        res
+          .status(404)
+          .json({ message: `No Director Found with the ID: ${_id}` });
       }
     })
     .catch((err) => {
@@ -96,7 +98,7 @@ const getActorByID = (req, res) => {
     });
 };
 
-module.exports = { getActors, getActorByName, getActorByID };
+module.exports = { getDirectors, getDirectorByName, getDirectorByID };
 </code></pre>
         </article>
     </section>
