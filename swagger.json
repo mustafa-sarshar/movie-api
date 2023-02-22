@@ -1,0 +1,336 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "movie-API",
+    "description": "Swagger documentation for API endpoints",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "musto-movie-api.onrender.com",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "Movies",
+      "description": "API for movies"
+    },
+    {
+      "name": "Genres",
+      "description": "API for genres"
+    },
+    {
+      "name": "Users",
+      "description": "API for users"
+    }
+  ],
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/movies": {
+      "get": {
+        "tags": ["Movies"],
+        "summary": "Get all movies",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Movies"
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/movies/{title}": {
+      "get": {
+        "tags": ["Movies"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "title",
+            "required": true,
+            "description": "Movie with id",
+            "schema": {
+              "$ref": "#/definitions/Movies/title"
+            }
+          }
+        ],
+        "summary": "Get info about a specific movie",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Movies"
+            }
+          }
+        }
+      }
+    },
+    "/movies/genres/{name}": {
+      "get": {
+        "tags": ["Genres"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "description": "Genre with name",
+            "schema": {
+              "$ref": "#/definitions/Genres/name"
+            }
+          }
+        ],
+        "summary": "Get info about a specific genre",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Genres"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "examples": {
+              "message": "No Genre Found with the name {name}"
+            }
+          }
+        }
+      }
+    },
+    "/genres/{_id}": {
+      "get": {
+        "tags": ["Genres"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "required": true,
+            "description": "Genre with id",
+            "schema": {
+              "$ref": "#/definitions/Genres/_id"
+            }
+          }
+        ],
+        "summary": "Get info about a specific genre",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Genres"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "examples": {
+              "message": "No Genre Found with the name {name}"
+            }
+          }
+        }
+      }
+    },
+    "/movies/directors/{name}": {
+      "get": {
+        "tags": ["Directors"],
+        "summary": "Get info about a specific director",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Directors"
+            }
+          }
+        }
+      }
+    },
+    "/directors/{_id}": {
+      "get": {
+        "tags": ["Directors"],
+        "summary": "Get info about a specific director",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Directors"
+            }
+          }
+        }
+      }
+    },
+    "/movies/actors/{name}": {
+      "get": {
+        "tags": ["Directors"],
+        "summary": "Get info about a specific director",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Directors"
+            }
+          }
+        }
+      }
+    },
+    "/actors/{_id}": {
+      "get": {
+        "tags": ["Directors"],
+        "summary": "Get info about a specific director",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Directors"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get all users",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Actors": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "636541bf21636541bf21abcd"
+        },
+        "name": {
+          "type": "string",
+          "example": "firstname lastname"
+        },
+        "bio": {
+          "type": "string",
+          "example": "Here is a short bio of the actor/actress."
+        },
+        "birth": {
+          "type": "date",
+          "example": "1900-01-01T00:00:00.000Z"
+        },
+        "death": {
+          "type": "date",
+          "example": "1900-01-01T00:00:00.000Z"
+        }
+      }
+    },
+    "Directors": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "636541bf21636541bf21abcd"
+        },
+        "name": {
+          "type": "string",
+          "example": "firstname lastname"
+        },
+        "bio": {
+          "type": "string",
+          "example": "Here is a short bio of the director."
+        },
+        "birth": {
+          "type": "date",
+          "example": "1900-01-01T00:00:00.000Z"
+        },
+        "death": {
+          "type": "date",
+          "example": "1900-01-01T00:00:00.000Z"
+        }
+      }
+    },
+    "Genres": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "636541bf21636541bf21abcd"
+        },
+        "name": {
+          "type": "string",
+          "example": "Genre Name"
+        },
+        "des": {
+          "type": "string",
+          "example": "This is the description of the genre."
+        }
+      }
+    },
+    "Movies": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "636541bf21636541bf21abcd"
+        },
+        "title": {
+          "type": "string",
+          "example": "The name of the movie"
+        },
+        "des": {
+          "type": "string",
+          "example": "This is the description of the movie."
+        },
+        "director_id": {
+          "type": "string",
+          "example": "636541bf21636541bf21abcd"
+        },
+        "genre_id": {
+          "type": "string",
+          "example": "636541bf21636541bf21abcd"
+        },
+        "image_url": {
+          "type": "string",
+          "example": "https://www.website.com/images/image.jpg"
+        },
+        "featured": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "Users": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "636541bf21636541bf21abcd"
+        },
+        "username": {
+          "type": "string",
+          "example": "username1"
+        },
+        "pass": {
+          "type": "string",
+          "example": "the password (hashed)"
+        },
+        "email": {
+          "type": "email",
+          "example": "user@mail.com"
+        },
+        "birth": {
+          "type": "date",
+          "example": "1900-01-01T00:00:00.000Z"
+        },
+        "favList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "636541bf21636541bf21abcd"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+// Global values
+$color-table__bg--light-1: #e4e4de;
+$color-table__border--dark: #000000;
+$color-table__td__bg--light: #d3d3d3;
+$color-table__td__bg--dark: #808080;
+
+$size-table-breakpoint--1: 1705px;    // screen width in pixels
+
+body {
+    background-color: #b1b1b1;
+}
+
+.my {
+    &-table {
+        margin: auto;
+        border-collapse: collapse;
+        table-layout: auto;
+        min-width: 1700px;
+        * {
+            padding: 10px;
+        }
+        td,
+        th {
+            &:nth-child(1){
+                max-width: 250px;
+            }
+            &:nth-child(2){
+                min-width: 300px;
+            }
+        }
+        thead {
+            tr {
+                background-color: $color-table__bg--light-1;
+                text-align: center;
+                border-bottom: 2px solid $color-table__border--dark;
+            }
+        }
+        tbody {
+            tr {
+                text-align: left;
+                background-color: $color-table__td__bg--light;
+                border-bottom: 1px solid gray;
+                &:hover {
+                    filter: invert(1);
+                }
+            }
+            td {
+                &:first-child {
+                    border-right: 2px solid $color-table__border--dark;
+                }
+                &:nth-child(3){
+                    text-align: center;
+                    width: 150px;
+                }
+                &:nth-child(4),
+                &:nth-child(5){
+                    min-width: 450px;
+                }
+            }
+        }
+        tfoot {
+            td {
+                background-color: $color-table__bg--light-1;
+                text-align: center;
+                border-top: 2px solid $color-table__border--dark;
+                font-style: italic;
+            }
+        }
+        &__container {
+            width: 100%;
+            overflow-x: scroll;
+        }
+    }
+}
+
+.text-style {
+    &__code-paragraph {
+        color: darkblue;
+    }
+    &__tab-spacing {
+        margin-left: 4ch;
+    }
+}
