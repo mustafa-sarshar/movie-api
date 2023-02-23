@@ -32,7 +32,7 @@ const getMovies = (req, res) => {
 const getMoviesPopulated = (req, res) => {
   Movies.find()
     .populate({
-      path: "directors movies stars",
+      path: "directors genres stars",
       select: "",
     })
     .then((movies) => {
