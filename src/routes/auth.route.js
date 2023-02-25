@@ -1,16 +1,15 @@
-/**
- * @module authController
- * @description This modules includes all methods related to authentication.
- */
-const auth = require("../controllers/auth.controller");
+const router = require("express").Router(),
+  auth = require("../controllers/auth.controller");
 
 require("../controllers/passport.controller"); // Your local passport file
 
-/* POST login. */
 /**
- * Define the login route.
- * @param {router} router
+ * Routes for Authentication
  */
-module.exports = (router) => {
-  router.route("/login").post(auth);
-};
+
+/**
+ * Route for login
+ */
+router.route("/").post(auth);
+
+module.exports = router;

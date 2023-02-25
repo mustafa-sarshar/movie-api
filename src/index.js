@@ -32,13 +32,12 @@ const accessLogStream = fs.createWriteStream(
 
 const app = express();
 
+/**
+ * Define global middleware fo the app
+ */
 app.use(requestDateTimeNow);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(corsMiddleware); // Apply Cross-Origin Resource Sharing (CORS)
-
-const auth = require("./routes/auth.route")(app);
-require("./controllers/passport.controller");
-
 app.use(bodyParser.json());
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(methodOverride());
@@ -46,7 +45,7 @@ app.use(methodOverride());
 /**
  * Set the routes
  */
-app.use(express.static(path.join(__dirname, "public"))); // Public files
+app.use(express.static(path.join(__dirname, "public")));
 app.use("/movies", require(path.join(__dirname, "routes", "movies.route.js")));
 app.use("/users", require(path.join(__dirname, "routes", "users.route.js")));
 app.use(
@@ -55,6 +54,7 @@ app.use(
 );
 app.use("/actors", require(path.join(__dirname, "routes", "actors.route.js")));
 app.use("/genres", require(path.join(__dirname, "routes", "genres.route.js")));
+app.use("/login", require(path.join(__dirname, "routes", "auth.route.js")));
 
 /**
  * Set public routes
