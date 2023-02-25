@@ -1,5 +1,6 @@
 // Queries
 // All Movies that their director is: 'James Cameron'
+
 db.movies.find({
   directors: db.directors.findOne({ name: "James Cameron" })._id,
 });
