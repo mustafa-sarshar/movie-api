@@ -1,14 +1,7 @@
-/**
- * @module authController
- * @description This modules includes all methods related to authentication.
- */
-
 const jwt = require("jsonwebtoken"),
   passport = require("passport");
 
 const jwtSecret = process.env.SECRET_KEY; // This has to be the same key used in the JWTStrategy
-
-require("./passport.controller"); // Your local passport file
 
 /**
  * @function
@@ -24,33 +17,28 @@ const generateJWTToken = (user) => {
   });
 };
 
-/* POST login. */
-/**
- * Define the login route.
- * @param {router} router
- */
-module.exports = (router) => {
-  router.route("/login").post(async (req, res) => {
-    passport.authenticate("local", { session: false }, (error, user, info) => {
-      if (error || !user) {
-        return res.status(400).json({
-          message: "Something is not right",
-          user: user,
-        });
-      }
-      req.login(user, { session: false }, async (error) => {
-        if (error) {
-          res.json({ message: error });
-        }
-        const token = generateJWTToken(user.toJSON());
-        return res.json({ user: user, token: token });
-
-        /* const resJSON = {};
-        resJSON._id = user._id.toString();
-        const token = await generateJWTToken(resJSON);
-        return res.json({ token: token }); 
-        */
+const auth = (req, res) => {
+  passport.authenticate("local", { session: false }, (error, user, info) => {
+    if (error || !user) {
+      return res.status(400).json({
+        message: "Something is not right",
+        user: user,
       });
-    })(req, res);
-  });
+    }
+    req.login(user, { session: false }, async (error) => {
+      if (error) {
+        res.json({ message: error });
+      }
+      const token = generateJWTToken(user.toJSON());
+      return res.json({ user: user, token: token });
+
+      /* const resJSON = {};
+      resJSON._id = user._id.toString();
+      const token = await generateJWTToken(resJSON);
+      return res.json({ token: token }); 
+      */
+    });
+  })(req, res);
 };
+
+module.exports = auth;
