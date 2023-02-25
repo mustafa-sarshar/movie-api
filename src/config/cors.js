@@ -9,7 +9,7 @@ const corsMiddleware = cors({
     if (process.env.ALLOWED_ORIGINS) {
       allowedOrigins = process.env.ALLOWED_ORIGINS.split(";");
     }
-    // console.log("AllowedOrigins:", allowedOrigins);
+    console.log("AllowedOrigins:", allowedOrigins);
 
     if (!origin || allowedOrigins.indexOf("*") > -1) {
       return callback(null, true);

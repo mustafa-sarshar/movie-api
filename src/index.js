@@ -15,7 +15,7 @@ const express = require("express"),
 
 const { requestDateTimeNow } = require("./utilities/middleware.utility"),
   { corsMiddleware } = require("./config/cors"),
-  swaggerJSON = require("./public/swagger");
+  swaggerJSON = require("../public/swagger");
 
 mongoose.connect(process.env.DATABASE_URI, {
   useNewUrlParser: true,
@@ -56,13 +56,13 @@ app.use("/genres", require(path.join(__dirname, "routes", "genres.route.js")));
 
 // Public Routes
 app.route("/").get((req, res) => {
-  res.sendFile("./public/index.html", { root: __dirname });
+  res.sendFile(path.resolve("./public/index.html"));
 });
 app.route("/documentation").get((req, res) => {
-  res.sendFile("./public/tutorials/documentation.html", { root: __dirname });
+  res.sendFile(path.resolve("./public/tutorials/documentation.html"));
 });
 app.route("/tutorials").get((req, res) => {
-  res.sendFile("./public/docs/index.html", { root: __dirname });
+  res.sendFile(path.resolve("./public/docs/index.html"));
 });
 
 // Error-handling middleware
