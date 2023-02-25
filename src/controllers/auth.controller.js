@@ -1,3 +1,8 @@
+/**
+ * @module authController
+ * @description This modules includes all methods related to authentication.
+ */
+
 const jwt = require("jsonwebtoken"),
   passport = require("passport");
 

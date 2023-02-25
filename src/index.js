@@ -3,34 +3,42 @@ require("dotenv").config();
 
 // Requirements
 const express = require("express"),
-  https = require("https"),
-  http = require("http"),
   morgan = require("morgan"),
   fs = require("fs"),
   path = require("path"),
   bodyParser = require("body-parser"),
   methodOverride = require("method-override"),
   mongoose = require("mongoose"),
-  swaggerUi = require("swagger-ui-express");
-
-const { requestDateTimeNow } = require("./utilities/middleware.utility"),
+  swaggerUi = require("swagger-ui-express"),
+  { requestDateTimeNow } = require("./utilities/middleware.utility"),
   { corsMiddleware } = require("./config/cors"),
   swaggerJSON = require("../public/swagger");
 
+// const https = require("https"),
+//   http = require("http");
+
+/**
+ * Define the global app variable
+ */
+const app = express();
+
+/**
+ * Connect the mongoose object to the database
+ */
 mongoose.connect(process.env.DATABASE_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-// create a write stream (in append mode) a ‘log.txt’ file is created in root directory
+/**
+ * create a write stream (in append mode) a ‘log.txt’ file is created in root directory
+ */
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, "logs", "log.txt"),
   {
     flags: "a",
   }
 );
-
-const app = express();
 
 /**
  * Define global middleware fo the app
@@ -91,8 +99,8 @@ app.use(
  * Set and run the server
  */
 const PORT_DEFAULT = 8080;
-const PORT_HTTP = process.env.PORT_HTTP || 80;
-const PORT_HTTPS = process.env.PORT_HTTPS || 443;
+// const PORT_HTTP = process.env.PORT_HTTP || 80;
+// const PORT_HTTPS = process.env.PORT_HTTPS || 443;
 
 // // Source: https://stackoverflow.com/questions/11744975/enabling-https-on-express-js
 // const serverCredentials = {
@@ -100,6 +108,9 @@ const PORT_HTTPS = process.env.PORT_HTTPS || 443;
 //   cert: fs.readFileSync(path.join(__dirname, "selfsigned.crt"), "utf-8"),
 // };
 
+/**
+ * Listen to mongoose object as well as to the app while running.
+ */
 mongoose.connection.once("open", () => {
   console.log("Connected to Database");
   // const serverHttp = http.createServer(app);
