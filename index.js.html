@@ -31,26 +31,36 @@ require("dotenv").config();
 
 // Requirements
 const express = require("express"),
-  https = require("https"),
-  http = require("http"),
   morgan = require("morgan"),
   fs = require("fs"),
   path = require("path"),
   bodyParser = require("body-parser"),
   methodOverride = require("method-override"),
   mongoose = require("mongoose"),
-  swaggerUi = require("swagger-ui-express");
-
-const { requestDateTimeNow } = require("./utilities/middleware.utility"),
+  swaggerUi = require("swagger-ui-express"),
+  { requestDateTimeNow } = require("./utilities/middleware.utility"),
   { corsMiddleware } = require("./config/cors"),
-  swaggerJSON = require("./public/swagger");
+  swaggerJSON = require("../public/swagger");
 
+// const https = require("https"),
+//   http = require("http");
+
+/**
+ * Define the global app variable
+ */
+const app = express();
+
+/**
+ * Connect the mongoose object to the database
+ */
 mongoose.connect(process.env.DATABASE_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-// create a write stream (in append mode) a ‘log.txt’ file is created in root directory
+/**
+ * create a write stream (in append mode) a ‘log.txt’ file is created in root directory
+ */
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, "logs", "log.txt"),
   {
@@ -58,21 +68,20 @@ const accessLogStream = fs.createWriteStream(
   }
 );
 
-const app = express();
-
+/**
+ * Define global middleware fo the app
+ */
 app.use(requestDateTimeNow);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(corsMiddleware); // Apply Cross-Origin Resource Sharing (CORS)
-
-const auth = require("./controllers/auth.controller")(app);
-require("./controllers/passport.controller");
-
 app.use(bodyParser.json());
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(methodOverride());
 
-// Set Routes
-app.use(express.static(path.join(__dirname, "public"))); // Public files
+/**
+ * Set the routes
+ */
+app.use(express.static(path.join(__dirname, "public")));
 app.use("/movies", require(path.join(__dirname, "routes", "movies.route.js")));
 app.use("/users", require(path.join(__dirname, "routes", "users.route.js")));
 app.use(
@@ -81,25 +90,32 @@ app.use(
 );
 app.use("/actors", require(path.join(__dirname, "routes", "actors.route.js")));
 app.use("/genres", require(path.join(__dirname, "routes", "genres.route.js")));
+app.use("/login", require(path.join(__dirname, "routes", "auth.route.js")));
 
-// Public Routes
+/**
+ * Set public routes
+ */
 app.route("/").get((req, res) => {
-  res.sendFile("./public/index.html", { root: __dirname });
+  res.sendFile(path.resolve("./public/index.html"));
 });
 app.route("/documentation").get((req, res) => {
-  res.sendFile("./public/tutorials/documentation.html", { root: __dirname });
+  res.sendFile(path.resolve("./public/tutorials/documentation.html"));
 });
 app.route("/tutorials").get((req, res) => {
-  res.sendFile("./public/docs/index.html", { root: __dirname });
+  res.sendFile(path.resolve("./public/docs/index.html"));
 });
 
-// Error-handling middleware
+/**
+ * Error-handling middleware
+ */
 app.use((err, req, res, next) => {
   console.error("Error:\n", err.stack);
   res.status(500).send("Something broke!");
 });
 
-// Swagger UI for API Documentation
+/**
+ * Swagger UI for API Documentation
+ */
 app.use(
   "/swagger",
   swaggerUi.serve,
@@ -107,15 +123,12 @@ app.use(
   swaggerUi.setup(swaggerJSON, { explorer: true })
 );
 
-// Set and run the server
-/** @constant
- * Defines the default HTTP Port
- * @description The default server port
- * @type {number}
-*/
+/**
+ * Set and run the server
+ */
 const PORT_DEFAULT = 8080;
-const PORT_HTTP = process.env.PORT_HTTP || 80;
-const PORT_HTTPS = process.env.PORT_HTTPS || 443;
+// const PORT_HTTP = process.env.PORT_HTTP || 80;
+// const PORT_HTTPS = process.env.PORT_HTTPS || 443;
 
 // // Source: https://stackoverflow.com/questions/11744975/enabling-https-on-express-js
 // const serverCredentials = {
@@ -123,11 +136,13 @@ const PORT_HTTPS = process.env.PORT_HTTPS || 443;
 //   cert: fs.readFileSync(path.join(__dirname, "selfsigned.crt"), "utf-8"),
 // };
 
+/**
+ * Listen to mongoose object as well as to the app while running.
+ */
 mongoose.connection.once("open", () => {
   console.log("Connected to Database");
   // const serverHttp = http.createServer(app);
   // const serverHttps = https.createServer(serverCredentials, app);
-
   // Start the server and listen to events on port ...
   // serverHttp.listen(PORT_HTTP, "0.0.0.0", () => {
   //   console.log(`Server (HTTP) is running on port ${PORT_HTTP}`);
@@ -135,6 +150,7 @@ mongoose.connection.once("open", () => {
   // serverHttps.listen(PORT_HTTPS, "0.0.0.0", () => {
   //   console.log(`Server (HTTPS) is running on port ${PORT_HTTPS}`);
   // });
+
   app.listen(PORT_DEFAULT, () => {
     console.log(`Server is running on port ${PORT_DEFAULT}`);
   });
@@ -149,13 +165,13 @@ mongoose.connection.once("open", () => {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-actorsController.html">actorsController</a></li><li><a href="module-authController.html">authController</a></li><li><a href="module-directorsController.html">directorsController</a></li><li><a href="module-genresController.html">genresController</a></li><li><a href="module-middlewareUtility.html">middlewareUtility</a></li><li><a href="module-moviesController.html">moviesController</a></li><li><a href="module-passportController.html">passportController</a></li><li><a href="module-usersController.html">usersController</a></li><li><a href="module-validatorsUtility.html">validatorsUtility</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-documentation.html">MovieApi Documentation</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Defines">Defines</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-actorsController.html">actorsController</a></li><li><a href="module-authController.html">authController</a></li><li><a href="module-directorsController.html">directorsController</a></li><li><a href="module-genresController.html">genresController</a></li><li><a href="module-middlewareUtility.html">middlewareUtility</a></li><li><a href="module-moviesController.html">moviesController</a></li><li><a href="module-passportController.html">passportController</a></li><li><a href="module-usersController.html">usersController</a></li><li><a href="module-validatorsUtility.html">validatorsUtility</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-documentation.html">MovieApi Documentation</a></li></ul><h3>Global</h3><ul><li><a href="global.html#PORT_DEFAULT">PORT_DEFAULT</a></li><li><a href="global.html#accessLogStream">accessLogStream</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#corsMiddleware">corsMiddleware</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Feb 22 2023 11:36:44 GMT+0100 (Central European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Feb 25 2023 14:58:43 GMT+0100 (Central European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
