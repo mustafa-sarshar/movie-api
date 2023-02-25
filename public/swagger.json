@@ -9,7 +9,7 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "musto-movie-api.onrender.com",
+  "host": "https://musto-movie-api-vf0k.onrender.com",
   "basePath": "",
   "tags": [
     {
