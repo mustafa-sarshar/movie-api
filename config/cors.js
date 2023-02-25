@@ -1,5 +1,8 @@
 const cors = require("cors");
 
+/**
+ * The global configuration for CORS
+ */
 const corsMiddleware = cors({
   origin: (origin, callback) => {
     let allowedOrigins = ["*"];
