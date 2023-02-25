@@ -8,6 +8,7 @@ var movieN = {
     "featured": true,
 }
 */
+
 var movies = [];
 
 movies.push({
