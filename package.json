@@ -7,7 +7,7 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "jsdoc": "jsdoc -c jsdoc.json",
-    "deploy-jsdoc": "gh-pages -d public/docs"
+    "deploy-jsdoc": "gh-pages -d docs"
   },
   "repository": {
     "type": "git",
