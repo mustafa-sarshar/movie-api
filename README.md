@@ -36,3 +36,9 @@
 - Allow users to add a movie to their list of favorites
 - Allow users to remove a movie from their list of favorites
 - Allow existing users to deregister
+
+## TECHNOLOGIES USED
+
+- Node.js
+- Express.js
+- MongoDB
